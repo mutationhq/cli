@@ -1,0 +1,30 @@
+{
+  "name": "@mutationhq/cli-darwin-arm64",
+  "version": "0.1.0",
+  "description": "The mutation binary for macOS ARM64; installed by @mutationhq/cli",
+  "license": "SEE LICENSE IN LICENSE-BINARY",
+  "author": "Mutation <support@mutation.sh>",
+  "homepage": "https://github.com/mutationhq/cli#readme",
+  "bugs": {
+    "url": "https://github.com/mutationhq/cli/issues",
+    "email": "support@mutation.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mutationhq/cli.git",
+    "directory": "npm/cli-darwin-arm64"
+  },
+  "os": [
+    "darwin"
+  ],
+  "cpu": [
+    "arm64"
+  ],
+  "files": [
+    "bin/",
+    "LICENSE-BINARY",
+    "THIRD-PARTY-NOTICES",
+    "README.md"
+  ],
+  "preferUnplugged": true
+}

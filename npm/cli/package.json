@@ -1,0 +1,43 @@
+{
+  "name": "@mutationhq/cli",
+  "version": "0.1.0",
+  "description": "Mutation's command line: verify a mutation and query the System State of a repository",
+  "keywords": [
+    "mutation",
+    "cli",
+    "code-analysis",
+    "sql",
+    "opencypher",
+    "verification"
+  ],
+  "license": "MIT",
+  "author": "Mutation <support@mutation.sh>",
+  "homepage": "https://github.com/mutationhq/cli#readme",
+  "bugs": {
+    "url": "https://github.com/mutationhq/cli/issues",
+    "email": "support@mutation.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mutationhq/cli.git",
+    "directory": "npm/cli"
+  },
+  "type": "module",
+  "bin": {
+    "mutation": "bin/mutation.mjs"
+  },
+  "files": [
+    "bin/mutation.mjs",
+    "LICENSE",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "optionalDependencies": {
+    "@mutationhq/cli-darwin-arm64": "0.1.0",
+    "@mutationhq/cli-linux-x64": "0.1.0",
+    "@mutationhq/cli-linux-arm64": "0.1.0",
+    "@mutationhq/cli-win32-x64": "0.1.0"
+  }
+}

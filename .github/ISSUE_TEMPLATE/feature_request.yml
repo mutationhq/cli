@@ -1,0 +1,31 @@
+name: Feature request
+description: Ask for a command, an option or a format, or for one not built yet
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        What you submit here is Feedback under section 20 of the Mutation CLI License (see CONTRIBUTING.md).
+  - type: textarea
+    id: problem
+    attributes:
+      label: What you are trying to do
+      description: The task, and where mutation falls short of it today.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would help
+      description: The command, flag, query or output you have in mind, with an example if you can.
+    validations:
+      required: true
+  - type: input
+    id: command
+    attributes:
+      label: Related command
+      placeholder: mutation query callers
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: What you use instead today

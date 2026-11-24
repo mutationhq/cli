@@ -1,0 +1,41 @@
+# Changelog
+
+Every notable change to the `mutation` CLI, and to its [legal documents](docs/legal.md), is recorded here. The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html). Before 1.0, a minor version may change commands, flags or output.
+
+## [Unreleased]
+
+The first release, planned as 0.1.0. Most commands are not built yet and exit 5 (`not_implemented`).
+
+### Added
+
+- The full command surface: `index`, `query` with its 14 kinds, `verify`, `context`, `watch`, `config`, `completions` and `debug`. Every command, flag and kind parses and checks its arguments; a command not built then exits 5, and `mutation --help` marks it.
+- `mutation config show`, `validate`, `schema` and `init` for the repository's `mutation.yml` and the machine's `config.yml`, with `MUT_*` variables and a stated precedence. Unknown keys and variables are refused.
+- `mutation completions` for bash, zsh, fish, PowerShell and elvish.
+- `mutation debug index`, `debug shares` and `debug detect`: measurements, unstable across releases.
+- Exit codes 0 to 5 and 130, and errors as `mutation: <message> (<code>)` on stderr, or one `mutation-error/1` JSON line under a machine format.
+- `mutation --version --format json` with the build's target, commit and date.
+- Builds for macOS ARM64, Linux x64 and ARM64 (glibc 2.28 or newer), and Windows x64, published to npm as `@mutationhq/cli` and to Homebrew as `mutationhq/tap/mutation`.
+
+### Legal
+
+- The Mutation CLI License 1.2 (effective 2026-11-24), with the owner's decisions: Mutation.sh is the licensor, reached at support@mutation.sh, and legal notices go by email; Delaware law and courts (17.1); export classification EAR99, self-classified (14.2); no promised support period for the free Software beyond what the law requires, and a paid agreement's own terms for its paid term (13); Telemetry a condition of the free licence, opt-out under a paid agreement (7.4). `SECURITY.md` 1.2 and the privacy notice 1.1 follow it.
+- The Mutation CLI License 1.1 (effective 2026-11-24), after the panel's second round: authenticity follows the signed release, so an Official Channel's installer may unpack, relink, relocate or re-sign a copy; public mirrors' automatic copies are no longer refused; good-faith security research under `SECURITY.md` may disassemble the Software; security notices start when Mutation becomes aware, without holding back a notice the law requires; `SECURITY.md`'s response times are targets; the risk of not verifying, the retroactive acceptance, the non-reliance clause and the one-year claim window apply to Business Users only; the Consumer warranty disclaimer names merchantability; preview versions get security updates for the support period; a Telemetry defect falls under the warranty and liability sections and is corrected; "country or state" for a Consumer's home law; narrower indemnity, survival and trademark wording. `LICENSE` and `SECURITY.md` move to 1.1, and `docs/legal.md` lists the decisions still open.
+- The Mutation CLI License 1.0 (`LICENSE-BINARY`, effective 2026-11-24), revised after a legal review for the US, the EU and the UK before its first release: free of charge for any lawful use; published only by Mutation, with byte-identical copies from registry mirrors, proxies, CDNs and caches allowed; the MIT-licensed Open Files carved out; Unauthentic Copies and Compromise Events defined, with verification left to the user at the user's risk and security notices given with commercially reasonable efforts; one tiered set of warranty and liability terms for Business Users (a cap of USD 50 or its equivalent) and Consumers (the protection of their own law); a Telemetry clause that defers to the privacy notice; export and sanctions, eligibility, preview status, Feedback, trademarks, US Government end users, notices and general terms. It ships in each platform package and release archive, not in `@mutationhq/cli`.
+- `@mutationhq/cli` is MIT: it holds only the launcher (with an SPDX header), its manifest, its README and `LICENSE`.
+- `LICENSE` (MIT, here, in `npm/cli/` and in mutationhq/homebrew-tap) gains a scope note: it does not cover the program in executable form.
+- The [privacy notice](docs/privacy.md) 1.0: no version sends anything yet; the rules Telemetry will follow: always on in the free Software, opt-out under a paid agreement (`telemetry: off`, `MUT_TELEMETRY=off`, `DO_NOT_TRACK=1`).
+- `SECURITY.md` 1.0: the coordinated vulnerability disclosure policy, with response times, advisories, Cyber Resilience Act notifications, good-faith research, compromise handling and the support period.
+- `CONTRIBUTING.md` 1.0: pull requests are MIT with a DCO sign-off; issues and other feedback are licensed to Mutation as Feedback.
+- [Legal documents](docs/legal.md): each document, its version, whom it binds, and the placeholders to fill before 0.1.0.
+- Each release must carry, and the release must refuse to publish without:
+  - `THIRD-PARTY-NOTICES`, the same for all four platforms, covering: every crate linked into the binary with its own licence text and copyright line; the Rust standard library at the pinned toolchain (`COPYRIGHT`, `LICENSE-MIT`, `LICENSE-APACHE`); GitHub Linguist v9.7.0's `LICENSE`, for its data compiled into the language detection tables; jemalloc's `COPYING` (BSD-2-Clause) and libdeflate's `COPYING` (MIT); the MIT text with the upstream copyright line for the Apple crates `objc2`, `objc2-encode`, `block2` and `dispatch2`, which ship no licence file; the Unicode-3.0 licence, the WHATWG BSD-3-Clause text of `encoding_rs` and the Apache-2.0 text; and the MPL-2.0 text;
+  - the MPL-2.0 source offer for `option-ext` 0.2.0, included unmodified: its source at crates.io and as `option-ext-0.2.0.crate` attached to the release, and on request to support@mutation.sh for at least three years;
+  - a CycloneDX software bill of materials for each archive, listed in `SHA256SUMS`;
+  - `LICENSE` beside `README.md` in each archive;
+  - a formula that installs `LICENSE-BINARY`, `LICENSE` and `THIRD-PARTY-NOTICES`;
+  - no published file that holds two opening square brackets, the form of the placeholders [legal documents](docs/legal.md) lists.
+- `docs/installation.md` warns that the unscoped npm package `mutation` is someone else's, and gives Homebrew's full name `mutationhq/tap/mutation` only.
+
+### Not implemented in this release
+
+- `index`, `query`, `verify`, `context`, `watch` and `debug data verify` exit 5 after checking their arguments.

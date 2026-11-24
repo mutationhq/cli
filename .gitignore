@@ -1,0 +1,19 @@
+# Dependencies and builds
+node_modules/
+dist/
+*.tgz
+
+# The release's binaries, added to the platform packages at publish
+npm/*/bin/
+!npm/cli/bin/
+
+# Systems
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*~

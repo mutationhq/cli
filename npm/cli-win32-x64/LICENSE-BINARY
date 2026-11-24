@@ -1,0 +1,709 @@
+MUTATION CLI LICENSE
+
+Version 1.2
+Effective date: 2026-11-24
+
+Copyright (c) 2026 Mutation.sh. All rights reserved.
+
+
+Summary (not part of this license)
+----------------------------------
+
+This summary helps You read the license below. It is not part of the
+license, and where the two differ, the license controls.
+
+- The `mutation` program is free of charge for any lawful use, personal or
+  commercial, including in CI and on an organization's machines.
+- Only Mutation publishes it: the npm packages under @mutationhq, the
+  formula in mutationhq/homebrew-tap and the GitHub Releases of
+  mutationhq/cli. Identical copies served by a registry mirror, a proxy, a
+  content delivery network or an internal cache are covered; repackaging or
+  redistributing the program is not allowed.
+- The documentation, the npm launcher and the Homebrew formula are open
+  source under the MIT License (the file LICENSE). This license covers only
+  the program itself.
+- Your code and Your Output stay Yours. Anything a version sends over a
+  network is listed, version by version, in the Privacy Notice
+  (docs/privacy.md), and Telemetry can always be turned off.
+- Check the checksums and signatures of a release before You run it.
+  Mutation is not liable to business users for a copy it did not build and
+  release, or one someone else altered, as Section 8 sets out.
+- For business users the program comes as is, and Mutation's liability is
+  excluded or capped at USD 50. Consumers keep the rights their own law
+  gives them, and no one loses a right the law says cannot be taken away.
+- If You do not accept this license, do not install or use the program.
+
+
+PLEASE READ THIS LICENSE CAREFULLY. BY ACCEPTING IT WHEN THE SOFTWARE ASKS,
+OR BY INSTALLING, COPYING OR USING THE SOFTWARE AFTER IT HAS BEEN MADE
+AVAILABLE TO YOU, YOU ACCEPT THIS LICENSE. IF YOU DO NOT ACCEPT IT, DO NOT
+INSTALL, COPY OR USE THE SOFTWARE.
+
+This license covers the `mutation` program in executable form (the
+"Software", defined in Section 1.2). The Open Files defined in Section 1.3
+are licensed under the MIT License in the file LICENSE, not under this
+license. The third-party components described in Section 6 are licensed
+under their own terms.
+
+
+1. DEFINITIONS
+
+1.1  "Mutation", "we" and "us" mean Mutation.sh, reachable at
+     support@mutation.sh, doing business as Mutation, and its successors
+     and assigns.
+
+1.2  "Software" means the `mutation` command-line program in executable
+     form, in every version, as built and released by Mutation through an
+     Official Channel, and any copy of it that is identical, byte for byte,
+     to the program in a release Mutation so published and signed (the
+     contents that the release's signed SHA256SUMS file records), apart from
+     file permissions and file metadata, and apart from the changes that an
+     Official Channel's own installer makes in the ordinary course, such as
+     unpacking, relinking, relocating paths or re-signing. It does not
+     include the Open Files or the third-party components described in
+     Section 6. For Sections 8 to 12 only, "Software" also includes any
+     Unauthentic Copy, although this license grants no right in one.
+
+1.3  "Open Files" means the files of the mutationhq/cli and
+     mutationhq/homebrew-tap repositories other than this license, the
+     Software in any form, THIRD-PARTY-NOTICES and CODE_OF_CONDUCT.md
+     (which is licensed under CC BY 4.0) (including the
+     documentation, the npm launcher `bin/mutation.mjs`, the `package.json`
+     and `README.md` files of the npm packages, and the Homebrew formula),
+     and copies of those files shipped beside the Software. The Open Files
+     are licensed under the MIT License in the file LICENSE of the
+     repository they come from, also when they are shipped beside the
+     Software. A file licensed under the MIT License is not Software.
+
+1.4  "Unauthentic Copy" means any program, package, release, update,
+     formula, archive, binary or other file that is presented as, or
+     purports to be, the Software or to come from Mutation, but that
+     Mutation did not build and release, or that was altered after Mutation
+     released it, other than by the changes Section 1.2 allows, by any
+     person other than Mutation acting through its authorized personnel,
+     wherever and however it was obtained, including through an Official
+     Channel.
+
+1.5  "Compromise Event" means any unauthorized access to, use of, or
+     control over any account, credential, token, signing key, build or
+     release system, repository, website or other infrastructure of
+     Mutation or of any Official Channel (including npm, Homebrew and
+     GitHub), whether or not Mutation knew of it, and whether or not it
+     resulted from Mutation's acts or omissions.
+
+1.6  "You" means the individual who installs, copies or uses the Software
+     and, where that individual acts for an organization, that
+     organization.
+
+1.7  "Consumer" means an individual who installs or uses the Software for
+     purposes wholly or mainly outside their trade, business, craft or
+     profession.
+
+1.8  "Business User" means You when You are not a Consumer, including an
+     individual who uses the Software for their trade, business, craft or
+     profession, and any organization for which the Software is used.
+
+1.9  "Official Channels" means only:
+     (a) the npm packages published under the @mutationhq scope;
+     (b) the Homebrew formula in the mutationhq/homebrew-tap repository;
+         and
+     (c) the GitHub Releases of the mutationhq/cli repository.
+
+1.10 "Output" means what the Software produces from Your repositories and
+     other inputs, such as reports, findings, query results and files.
+
+1.11 "Telemetry" means information about the use, performance or errors of
+     the Software that a version of it sends to Mutation, or to a third
+     party on Mutation's behalf, other than information You choose to send
+     through a feature You start for that purpose.
+
+1.12 "Privacy Notice" means the file docs/privacy.md of the mutationhq/cli
+     repository, in the version that applies to the version of the
+     Software You use.
+
+1.13 "Mutation Parties" means Mutation and its affiliates, officers,
+     directors, employees, contractors, agents, licensors and suppliers.
+
+
+2. ACCEPTANCE
+
+2.1  This license is offered with the Software in every Official Channel
+     and in the files shipped with the Software.
+
+2.2  Where the Software asks You to accept this license, You accept it by
+     the act it asks for, such as typing "yes", or passing an option or
+     setting a variable that the Software names for that purpose. That act
+     is Your acceptance.
+
+2.3  You also accept this license by installing, copying or using the
+     Software after this license, or a notice of it, has been made
+     available to You, whether or not the Software has asked You to accept
+     it.
+
+2.4  If You do not accept this license, do not install, copy or use the
+     Software. If You are a Business User and obtained or used the Software
+     before You accepted this license, it applies to that use too.
+
+2.5  If You accept this license on behalf of an organization, You confirm
+     that You have the authority to bind that organization to it.
+
+2.6  If You are a Consumer, Your rights under Sections 10.1 and 11 apply
+     whether or not this license binds You.
+
+
+3. LICENSE GRANT
+
+3.1  Subject to Your compliance with this license, Mutation grants You a
+     free of charge, non-exclusive, worldwide, non-transferable and
+     non-sublicensable license to install and use the Software for any
+     lawful purpose, including personal use, commercial use, continuous
+     integration, and use on an organization's machines and in its
+     pipelines by its employees and contractors on its behalf. No fee is
+     due. This license ends only as Sections 8.6, 14.5 and 15 provide.
+
+3.2  You may obtain the Software from an Official Channel, or install and
+     use any copy of it that is identical to one Mutation released through
+     an Official Channel, as Section 1.2 defines identical, however You
+     obtained it, including from a registry mirror, a package proxy, a
+     content delivery network, an internal cache or a container image built
+     for Your own internal use. Mutation publishes checksums and signatures
+     with which You can confirm that a copy is identical. You bear all risk
+     of obtaining the Software through any intermediary, and Mutation has no
+     responsibility for any intermediary. A copy that is not identical is
+     not the Software and is not licensed.
+
+3.3  You may make the copies of the Software that this use needs, including
+     backup copies.
+
+
+4. RESTRICTIONS
+
+Except as this license expressly permits, or as applicable law permits
+despite a contractual restriction, You may not:
+
+(a) sell, rent, lease, lend or sublicense the Software, host it for
+    others, or distribute it or otherwise make it available to any third
+    party, in any form or under any name, except that:
+    (i)  Your organization's employees and contractors may use copies held
+         under Section 3.2 for its internal purposes; and
+    (ii) automatic copies of packages published through an Official
+         Channel, made by registries, mirrors, proxies, content delivery
+         networks and caches, are not a breach of this license;
+    nothing in this license permits a repackaged or altered binary, an
+    installer of Your own, a package under another name or scope, or a
+    public archive or image that contains the Software, other than the
+    copies (ii) describes;
+(b) modify the Software or create derivative works of it;
+(c) reverse engineer, decompile or disassemble the Software,
+    except, for (b) and (c), to the extent that applicable law gives You
+    that right despite a contractual restriction, including under Articles
+    5 and 6 of Directive 2009/24/EC and sections 50A to 50C of the UK
+    Copyright, Designs and Patents Act 1988, or that a third-party license
+    under Section 6 gives it to You, or for good-faith security research
+    on Your own installation that follows SECURITY.md, to the extent
+    needed to find, show and report a vulnerability;
+(d) remove, alter or obscure any notice of copyright, license or
+    attribution in the Software;
+(e) use Mutation's names, logos or trademarks, except as Section 21
+    allows; or
+(f) use the Software in violation of any applicable law, including the
+    laws described in Section 14.
+
+
+5. OWNERSHIP
+
+The Software is licensed, not sold. Mutation and its licensors keep all
+right, title and interest in the Software, including all intellectual
+property rights. Mutation reserves all rights not expressly granted in this
+license.
+
+
+6. THIRD-PARTY COMPONENTS
+
+6.1  The Software includes components licensed by third parties under their
+     own terms, listed in the THIRD-PARTY-NOTICES file shipped with each
+     release. Those terms govern those components. Where a third-party
+     license grants You rights in a component that Section 4 would
+     restrict, such as a right to obtain its source code, to modify it or
+     to reverse engineer it for debugging, Section 4 does not restrict
+     those rights, and nothing in this license limits them.
+
+6.2  Where a third-party license requires Mutation to make the source code
+     of a component available, THIRD-PARTY-NOTICES says how to obtain it.
+
+6.3  Each release also carries a software bill of materials listing the
+     components compiled into the Software.
+
+
+7. YOUR OUTPUT, YOUR DATA AND NETWORK FEATURES
+
+7.1  As between You and Mutation, Mutation claims no rights in Your Output.
+     You are responsible for the inputs You give the Software and for Your
+     use of the Output.
+
+7.2  The Software processes Your repositories and files on Your machine.
+     Mutation does not receive Your code, Your repositories or Your Output
+     unless You use a feature that You start for the purpose of sending
+     them to a service of Mutation, which is then governed by that
+     service's own terms.
+
+7.3  A version of the Software connects to a network, or sends any
+     information to Mutation or to a third party, only as the Privacy
+     Notice for that version describes. The Privacy Notice lists each
+     network feature, what it sends, to whom, why, and whether and how
+     it can be turned off.
+
+7.4  A version of the Software sends Telemetry only as its Privacy Notice
+     describes. Telemetry is a condition of this free license: the free
+     Software sends it whenever the Privacy Notice for its version says so,
+     and it cannot be turned off. If You do not want Telemetry sent, do not
+     use the free Software. To the extent the law applicable to You requires
+     Your consent to Telemetry, You give it by using the free Software after
+     its Privacy Notice has been made available to You, and You withdraw it
+     by no longer using the free Software. A paid agreement with Mutation
+     that covers the Software may let You turn Telemetry off, as that
+     agreement states. Telemetry never includes the contents of Your
+     repositories, file or folder names or paths, repository names, remote
+     URLs, branch names, commit hashes, Your Output, the arguments You pass,
+     the text of error messages, or a hash of any of these.
+
+7.5  Mutation processes personal data in connection with the Software as
+     the Privacy Notice describes.
+
+7.6  Sections 7.2 to 7.4 describe how Mutation builds the Software. They do
+     not apply to an Unauthentic Copy or to a version affected by a
+     Compromise Event, and Sections 8 to 11 apply to them. A version that,
+     through a defect, behaves otherwise than Sections 7.2 to 7.4 describe
+     is subject to Sections 9 and 10, and Mutation will correct it under
+     Section 13.1.
+
+
+8. INTEGRITY, COMPROMISE AND VERIFICATION
+
+8.1  MUTATION MAKES NO WARRANTY THAT THE SOFTWARE, THE OFFICIAL CHANNELS, OR
+     MUTATION'S ACCOUNTS, CREDENTIALS, SIGNING KEYS, SYSTEMS OR
+     INFRASTRUCTURE ARE OR WILL REMAIN FREE FROM COMPROMISE, UNAUTHORIZED
+     ACCESS OR TAMPERING.
+
+8.2  EXCEPT WHERE THE LAW APPLICABLE TO YOU PROVIDES OTHERWISE, THE
+     MUTATION PARTIES HAVE NO LIABILITY FOR ANY UNAUTHENTIC COPY THAT YOU
+     OBTAINED FROM ANY SOURCE OTHER THAN AN OFFICIAL CHANNEL OR AN
+     INTERMEDIARY DESCRIBED IN SECTION 3.2, OR THAT WAS ALTERED AFTER YOU
+     OBTAINED IT.
+
+8.3  SUBJECT TO SECTION 10.1, IF YOU ARE A BUSINESS USER, THE MUTATION
+     PARTIES HAVE NO LIABILITY OF ANY KIND FOR ANY LOSS OR DAMAGE ARISING
+     FROM OR RELATING TO (A) ANY UNAUTHENTIC COPY, OR (B) ANY COMPROMISE
+     EVENT, INCLUDING WHERE THE UNAUTHENTIC COPY OR THE COMPROMISE EVENT
+     RESULTED IN WHOLE OR IN PART FROM MUTATION'S OWN NEGLIGENCE, INCLUDING
+     NEGLIGENCE IN SECURING, STORING, ROTATING OR REVOKING ITS ACCOUNTS,
+     CREDENTIALS, SIGNING KEYS, SYSTEMS OR INFRASTRUCTURE, OR IN DETECTING
+     OR GIVING NOTICE OF A COMPROMISE EVENT.
+
+8.4  Mutation publishes checksums and signatures for each release, and
+     instructions for checking them, in docs/verifying-releases.md of the
+     mutationhq/cli repository. Whether and how You check them is Your
+     decision. If You are a Business User, then, subject to Section 10.1,
+     You bear the risk of running any file whose checksum or signature You
+     did not check, or which failed a check. Where the law allows, Your
+     failure to check a release, or to follow a warning Mutation has
+     published about a specific release, may be taken into account in
+     assessing any claim.
+
+8.5  Security notices. When Mutation becomes aware that an Unauthentic Copy
+     has been published through an Official Channel, Mutation will use
+     commercially reasonable efforts to publish a notice identifying the
+     affected versions as a security advisory of the mutationhq/cli
+     repository and to revoke those versions, by deprecating or withdrawing
+     the affected npm packages, releases and formula versions where the
+     channel allows. Mutation may hold back details while it investigates or
+     as law enforcement requests, but not a notice the law requires. A
+     notice is for Your information only; Mutation's failure to give one, or
+     to give one sooner, does not create liability beyond what Section 10
+     permits. This Section does not limit any notification that the law
+     requires of Mutation, including under Regulation (EU) 2024/2847 (the
+     Cyber Resilience Act).
+
+8.6  Revocation. When Mutation publishes a notice under Section 8.5, or
+     otherwise announces that a version of the Software is withdrawn for a
+     security reason, Your license to the affected versions ends, and You
+     must stop using them and delete them. You may install the latest
+     version free of charge.
+
+8.7  The Software runs with Your permissions on Your machine and reads the
+     repositories and files You point it at. You are responsible for
+     running it in an environment You control, with backups and the least
+     privilege it needs.
+
+
+9. WARRANTY
+
+9.1  IF YOU ARE A BUSINESS USER, TO THE MAXIMUM EXTENT PERMITTED BY
+     APPLICABLE LAW, THE SOFTWARE IS PROVIDED "AS IS" AND "AS AVAILABLE",
+     WITH ALL FAULTS, AND MUTATION GIVES NO WARRANTY, CONDITION OR
+     REPRESENTATION OF ANY KIND, WHETHER EXPRESS, IMPLIED OR STATUTORY,
+     INCLUDING ANY WARRANTY OR CONDITION OF MERCHANTABILITY, SATISFACTORY
+     QUALITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT,
+     ACCURACY, QUIET ENJOYMENT, UNINTERRUPTED OR ERROR-FREE OPERATION, OR
+     FREEDOM FROM VIRUSES OR OTHER HARMFUL CODE, AND ANY WARRANTY ARISING
+     FROM A COURSE OF DEALING OR USAGE OF TRADE. YOU ARE SOLELY RESPONSIBLE
+     FOR DETERMINING WHETHER THE SOFTWARE AND ITS OUTPUT ARE APPROPRIATE FOR
+     YOUR USE, AND FOR ANY DECISION YOU MAKE, OR ACTION YOU TAKE, ON THE
+     BASIS OF THEM.
+
+9.2  IF YOU ARE A CONSUMER, THE SOFTWARE IS PROVIDED FREE OF CHARGE AND "AS
+     IS", AND MUTATION GIVES NO PROMISE ABOUT IT BEYOND WHAT THIS LICENSE
+     STATES AND WHAT THE LAW APPLICABLE TO YOU REQUIRES. TO THE EXTENT THAT
+     LAW ALLOWS, MUTATION EXCLUDES EVERY IMPLIED WARRANTY, INCLUDING ANY
+     IMPLIED WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR
+     PURPOSE. YOUR STATUTORY RIGHTS ARE NOT AFFECTED.
+
+9.3  Output is produced by automated analysis and may be incomplete or
+     wrong. Check it before You rely on it for a decision that matters.
+
+9.4  No advice or information, oral or written, obtained from Mutation or
+     through the Software creates any warranty not expressly stated in this
+     license.
+
+
+10. LIABILITY
+
+10.1 Liability that is never excluded. Nothing in this license excludes or
+     limits any liability of Mutation:
+     (a) for death or personal injury caused by negligence;
+     (b) for fraud or fraudulent misrepresentation, or for a defect
+         Mutation has fraudulently concealed;
+     (c) for loss caused intentionally, by wilful misconduct or by gross
+         negligence;
+     (d) under any product liability law that does not allow its
+         liability to be excluded or limited, including the laws
+         implementing Directive (EU) 2024/2853 and Part 1 of the UK
+         Consumer Protection Act 1987; or
+     (e) for anything else that the law applicable to You does not allow
+         to be excluded or limited by contract.
+     Sections 8, 9, 10.2 to 10.5 and 12 are subject to this Section 10.1.
+
+10.2 BUSINESS USERS. IF YOU ARE A BUSINESS USER, THEN, TO THE MAXIMUM
+     EXTENT PERMITTED BY APPLICABLE LAW:
+     (A) THE MUTATION PARTIES ARE NOT LIABLE FOR LOSS CAUSED BY SLIGHT
+         NEGLIGENCE;
+     (B) IN NO EVENT WILL THE MUTATION PARTIES BE LIABLE FOR ANY INDIRECT,
+         INCIDENTAL, SPECIAL, CONSEQUENTIAL, EXEMPLARY OR PUNITIVE DAMAGES,
+         OR FOR ANY LOSS OF DATA, CODE, PROFITS, REVENUE, BUSINESS,
+         CONTRACTS, GOODWILL, ANTICIPATED SAVINGS OR BUSINESS OPPORTUNITY,
+         BUSINESS INTERRUPTION, COMPUTER FAILURE OR MALFUNCTION, COST OF
+         SUBSTITUTE GOODS OR SERVICES, OR ANY SECURITY INCIDENT, ARISING
+         FROM OR RELATING TO THIS LICENSE, THE SOFTWARE, ANY UNAUTHENTIC
+         COPY, ANY OUTPUT, ANY OFFICIAL CHANNEL OR ANY COMPROMISE EVENT,
+         WHETHER OR NOT FORESEEABLE; AND
+     (C) THE TOTAL AGGREGATE LIABILITY OF THE MUTATION PARTIES FOR ALL
+         CLAIMS ARISING FROM OR RELATING TO THIS LICENSE, THE SOFTWARE, ANY
+         UNAUTHENTIC COPY, ANY OUTPUT, ANY OFFICIAL CHANNEL OR ANY
+         COMPROMISE EVENT WILL NOT EXCEED FIFTY UNITED STATES DOLLARS
+         (USD 50) OR THE EQUIVALENT IN THE CURRENCY OF THE COUNTRY WHERE
+         YOU RESIDE.
+
+10.3 Consumers. If You are a Consumer, then, subject to Section 10.1,
+     Mutation is not liable for loss caused by slight negligence, except
+     where it breaches an obligation whose performance is essential to the
+     proper use of the Software and on which You may reasonably rely. In
+     that case Mutation's liability is limited to loss that was typical and
+     reasonably foreseeable when You installed the Software.
+
+10.4 IF YOU ARE A BUSINESS USER, SECTIONS 8, 9 AND 10 APPLY UNDER ANY THEORY
+     OF LIABILITY, WHETHER IN CONTRACT, TORT (INCLUDING NEGLIGENCE), STRICT
+     LIABILITY, PRODUCT LIABILITY OR OTHERWISE, EVEN IF A MUTATION PARTY HAS
+     BEEN ADVISED OF THE POSSIBILITY OF THE DAMAGES, AND EVEN IF ANY REMEDY
+     FAILS OF ITS ESSENTIAL PURPOSE. THEY ARE INDEPENDENT OF ANY REMEDY THIS
+     LICENSE PROVIDES.
+
+10.5 The Software is provided free of charge, and Mutation sets the limits
+     in Sections 8, 9 and 10 for that reason: they are an essential basis
+     of the bargain between You and Mutation. If You are a Business User,
+     You are responsible for the decisions You take on the basis of the
+     Software and its Output, and for keeping backups of Your data.
+
+
+11. MANDATORY LAW AND CONSUMER RIGHTS
+
+11.1 This license does not exclude, limit or change any right You have, or
+     any liability Mutation has, that the law applicable to You does not
+     allow to be excluded, limited or changed by contract.
+
+11.2 If You are a Consumer, You keep the protection of the mandatory
+     provisions of the law of the country or state where You habitually
+     reside, whatever law Section 17 chooses.
+
+11.3 If a provision of this license is invalid or unenforceable against You
+     under the law applicable to You, it does not apply to You to that
+     extent, and the provision of law it would have displaced applies in
+     its place. If You are a Business User, the provision applies to the
+     greatest extent that law permits. The rest of this license is
+     unaffected.
+
+11.4 Nothing in this license affects Mutation's obligations under
+     Regulation (EU) 2024/2847 (the Cyber Resilience Act) or any other law
+     on the security of products.
+
+
+12. INDEMNITY (BUSINESS USERS)
+
+If You are a Business User, then, to the maximum extent permitted by
+applicable law, You will defend, indemnify and hold harmless the Mutation
+Parties from and against any claim by a third party, and any resulting loss,
+liability, damage, cost or expense (including reasonable legal fees), to the
+extent it arises from: (a) Your breach of this license; (b) Your data, code
+or repositories, or Your use of any Output, including Output You supply to a
+third party and any decision You make or action You take based on it; or (c)
+Your violation of any law or of any right of a third party. This Section
+does not apply to the extent the claim arises from a defect in the Software
+as Mutation released it, from Mutation's own breach, negligence or
+misconduct, or from an Unauthentic Copy, unless You obtained that copy from
+a source that Section 3.2 does not describe or ran it after it failed a
+check described in Section 8.4. Mutation will tell You of the claim promptly
+and let You conduct its defence. If You are a Consumer, this Section does
+not apply to You.
+
+
+13. SECURITY UPDATES, SUPPORT AND CHANGES
+
+13.1 The Software is provided free of charge, and Mutation promises no
+     support period, support, maintenance, security updates, new features
+     or service level for it, except what applicable law requires
+     (including, once its obligations apply, Regulation (EU) 2024/2847 on
+     vulnerability handling and security updates). Any update Mutation
+     provides, whether the law requires it or not, is provided as a new
+     version that You can install free of charge through any Official
+     Channel, and the latest version is the only one Mutation updates. The
+     response times in SECURITY.md are targets, not obligations, and
+     Section 8.5 governs notices of a Compromise Event.
+
+13.2 If You have a paid agreement with Mutation that covers the Software,
+     the support, maintenance and updates it describes are provided for the
+     paid term of that agreement and as it states, and that agreement
+     prevails over this Section 13 for that term.
+
+13.3 Mutation may change the Software, stop developing it, stop distributing
+     any version of it (which ends Your license to that version only as
+     Section 8.6 provides), or stop publishing through an Official Channel,
+     at any time, subject to what applicable law and a paid agreement
+     require.
+
+
+14. EXPORT CONTROLS AND SANCTIONS
+
+14.1 The Software is subject to the export control and economic sanctions
+     laws of the United States, including the Export Administration
+     Regulations and the regulations administered by the US Treasury
+     Department's Office of Foreign Assets Control, and may be subject to
+     those of other countries, including Regulation (EU) 2021/821 and the
+     sanctions regulations of the European Union and the United Kingdom.
+     You will comply with all of them.
+
+14.2 Mutation's export classification of the Software is EAR99,
+     self-classified: its only cryptographic functions are hash functions
+     used for data integrity, and it encrypts nothing. A later version may
+     have a different classification, stated in its release notes.
+
+14.3 You represent that You are not (a) located in, organized under the
+     laws of, or ordinarily resident in any country or region subject to
+     comprehensive US, EU or UK sanctions; (b) on, or owned or controlled
+     by any person on, any US, EU or UK list of restricted or sanctioned
+     parties, including the Specially Designated Nationals and Blocked
+     Persons List and the Entity List; or (c) acting for any such person.
+
+14.4 You will not download, use, export, re-export or transfer the Software
+     (a) to any such country, region or person, or (b) for any end use
+     those laws prohibit, including the design, development or production
+     of nuclear, chemical or biological weapons or missiles, or a military
+     end use where prohibited.
+
+14.5 Mutation may end Your license at once if it reasonably believes You
+     are in breach of this Section 14.
+
+
+15. TERMINATION
+
+15.1 If You materially breach this license and, where the breach can be
+     remedied, do not remedy it within 30 days of notice from Mutation,
+     Mutation may end this license. A breach of Section 4(a), 4(b) or 14
+     ends it automatically.
+
+15.2 When this license ends, for all versions or for some under Section
+     8.6, You must stop using the Software concerned and delete every copy
+     of it in Your possession or control.
+
+15.3 Sections 1, 4 to 12, 14, 15, 16, 17 and 20 to 25, and any other
+     provision that by its nature should survive, survive the end of this
+     license.
+
+
+16. LATER VERSIONS OF THESE TERMS
+
+Mutation may publish new terms for later versions of the Software. It
+publishes each version of these terms, with its effective date, in the
+mutationhq/cli repository. Each version of the Software remains under the
+terms it shipped with. A later version of these terms applies to You only
+once You accept it under Section 2.
+
+
+17. GOVERNING LAW AND COURTS
+
+17.1 This license, and any dispute or claim arising out of or in connection
+     with it or the Software, including a non-contractual one, is governed
+     by the laws of the State of Delaware, United States, without regard to
+     its conflict-of-laws rules, and, where federal law applies, by the
+     federal law of the United States. The courts named in this license are
+     the state courts located in Delaware and the United States District
+     Court for the District of Delaware. The United Nations Convention on
+     Contracts for the International Sale of Goods and any law enacting the
+     Uniform Computer Information Transactions Act do not apply.
+
+17.2 If You are a Business User, the courts named in Section 17.1 have
+     exclusive jurisdiction, and You and Mutation consent to their personal
+     jurisdiction and waive any objection to venue there. Mutation may seek
+     injunctive or other equitable relief in any court of competent
+     jurisdiction to protect its intellectual property.
+
+17.3 If You are a Consumer, Section 11.2 applies. Where the law of the
+     country or state where You habitually reside gives You that right, You
+     may bring proceedings in its courts or in those named in Section 17.1,
+     and Mutation may bring proceedings against You only in the courts of
+     that country or state.
+
+17.4 TO THE EXTENT PERMITTED BY APPLICABLE LAW, YOU AND MUTATION EACH WAIVE
+     ANY RIGHT TO A TRIAL BY JURY IN ANY ACTION ARISING FROM OR RELATING TO
+     THIS LICENSE OR THE SOFTWARE.
+
+17.5 Subject to Section 10.1, if You are a Business User, any claim arising
+     from or relating to this license or the Software must be brought within
+     one year after the claim arises, or, where applicable law does not
+     permit that period, within the shortest period that law permits.
+
+
+18. ELIGIBILITY
+
+You must be at least eighteen years old, or the age of majority where You
+live if that is higher, and have the legal capacity to accept this license,
+or be at least thirteen years old and use the Software with the consent of
+a parent or legal guardian who accepts this license for You. If You accept
+this license for an organization, You must be authorized to bind it.
+
+
+19. PREVIEW STATUS
+
+Versions of the Software numbered below 1.0.0, and any version or feature
+Mutation labels as preview, beta, experimental or not implemented, are
+early versions. They may be incomplete, contain errors, change in
+incompatible ways, or lose or corrupt data files they create. Section 13
+applies to them as to any other version, and Sections 8 to 11 apply to
+them in full.
+
+
+20. FEEDBACK
+
+20.1 If You give Mutation any suggestion, comment, bug report or other
+     feedback about the Software ("Feedback"), Mutation may use, copy,
+     modify, disclose and otherwise exploit it for any purpose, including
+     in the Software, without obligation or payment to You. You grant
+     Mutation a perpetual, irrevocable, worldwide, royalty-free, fully
+     paid-up, transferable and sublicensable license to do so.
+
+20.2 Feedback does not include Your code or repositories, and You are not
+     required to give any. Do not include confidential information or
+     personal data in Feedback, and give only Feedback You have the right
+     to give on these terms.
+
+20.3 A contribution to the Open Files by pull request is governed by
+     CONTRIBUTING.md of the repository it is made to, not by this Section.
+
+
+21. TRADEMARKS
+
+"Mutation", the Mutation logo and any other marks of Mutation are
+trademarks of Mutation. Neither this license nor the MIT License grants
+You any right to use them, except to refer accurately to Mutation and the
+Software without implying endorsement. You may not publish any package,
+formula, image, binary, download or service under the Mutation name, or a
+name or scope confusingly similar to it, or in a way that suggests it is
+the Software or comes from Mutation.
+
+
+22. US GOVERNMENT END USERS
+
+The Software is "commercial computer software" and its documentation is
+"commercial computer software documentation", as those terms are used in
+48 C.F.R. 2.101. Consistent with 48 C.F.R. 12.212 and 48 C.F.R.
+227.7202-1 to 227.7202-4, US Government end users acquire the Software and
+its documentation with only the rights set out in this license. Any
+provision inconsistent with federal procurement law does not apply to the
+Government to that extent.
+
+
+23. NOTICES
+
+Mutation may give You notices about this license or the Software by
+publishing them in the mutationhq/cli repository (including as a security
+advisory or release note), through an Official Channel, or by email if You
+have given Mutation an email address. You give notices to Mutation at
+support@mutation.sh, with "Legal notice" in the subject. A notice to
+Mutation is effective when received.
+
+
+24. GENERAL
+
+24.1  Severability. If a provision of this license is held invalid or
+      unenforceable, the rest of it stays in force. Section 11.3 says what
+      applies in its place.
+
+24.2  No waiver. A failure or delay by Mutation in enforcing any provision
+      is not a waiver of it or of any other provision.
+
+24.3  Entire agreement. This license, together with the THIRD-PARTY-NOTICES
+      file for the components it names, is the entire agreement between You
+      and Mutation about the Software and supersedes any prior or
+      contemporaneous understanding about it. If You are a Business User,
+      then, subject to Section 10.1, You have not relied on any statement,
+      promise or representation about the Software, its security, its
+      behavior or its distribution, including any made in Mutation's
+      documentation, README files, security policy, website or
+      communications, except as this license expressly states, including
+      where it refers to the Privacy Notice or to SECURITY.md, and the
+      documentation describes the Software and does not otherwise form part
+      of this license or create any warranty or obligation toward You.
+
+24.4  Assignment. Mutation may assign or transfer this license, in whole or
+      in part, without Your consent, including in connection with a
+      merger, acquisition or sale of assets. If You are a Consumer, an
+      assignment by Mutation will not reduce Your rights under this
+      license. You may not assign or transfer this license or any right
+      under it; any attempt to do so is void.
+
+24.5  No third-party beneficiaries. This license benefits only You and
+      Mutation, except that the Mutation Parties may enforce Sections 8 to
+      12. No one else has any right under it.
+
+24.6  Equitable relief. A breach of Section 3 or 4 would cause Mutation
+      irreparable harm for which damages would not be an adequate remedy,
+      and Mutation may seek injunctive relief without posting a bond, to
+      the extent the law allows.
+
+24.7  Electronic acceptance. Your acceptance under Section 2 is an
+      electronic signature and has the same effect as a signed writing,
+      under the US Electronic Signatures in Global and National Commerce
+      Act and similar laws.
+
+24.8  Interpretation. "Including" means "including without limitation".
+      Except where the law applicable to You requires otherwise, no
+      provision will be construed against Mutation because Mutation drafted
+      it. Headings and the summary above Section 1 are for convenience only
+      and do not affect the meaning of this license. If this license is
+      translated, the English version controls.
+
+24.9  Relationship. Nothing in this license creates a partnership, joint
+      venture, agency or employment relationship.
+
+
+25. CONTACT
+
+Questions about this license: support@mutation.sh

@@ -1,0 +1,33 @@
+{
+  "name": "@mutationhq/cli-linux-x64",
+  "version": "0.1.0",
+  "description": "The mutation binary for Linux x64 (glibc 2.28 or newer); installed by @mutationhq/cli",
+  "license": "SEE LICENSE IN LICENSE-BINARY",
+  "author": "Mutation <support@mutation.sh>",
+  "homepage": "https://github.com/mutationhq/cli#readme",
+  "bugs": {
+    "url": "https://github.com/mutationhq/cli/issues",
+    "email": "support@mutation.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mutationhq/cli.git",
+    "directory": "npm/cli-linux-x64"
+  },
+  "os": [
+    "linux"
+  ],
+  "cpu": [
+    "x64"
+  ],
+  "libc": [
+    "glibc"
+  ],
+  "files": [
+    "bin/",
+    "LICENSE-BINARY",
+    "THIRD-PARTY-NOTICES",
+    "README.md"
+  ],
+  "preferUnplugged": true
+}
