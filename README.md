@@ -47,6 +47,10 @@ No install: `npx @mutationhq/cli verify`. Runs on macOS (Apple silicon), Linux (
 
 Charts from `mutation` on public repositories ([how each was made](docs/assets/gallery/SOURCES.md)):
 
+<picture><source media="(prefers-color-scheme: dark)" srcset="docs/assets/gallery/hierarchy-tokio-dark.svg"><img alt="tokio-rs/tokio at a glance: every directory and file, sized by its definitions" src="docs/assets/gallery/hierarchy-tokio-light.svg"></picture>
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="docs/assets/gallery/quality-cobra-dark.svg"><img alt="spf13/cobra's quality over 200 commits: duplication, complexity and cognitive density, comments, cycles and test code, each with its trend" src="docs/assets/gallery/quality-cobra-light.svg"></picture>
+
 <picture><source media="(prefers-color-scheme: dark)" srcset="docs/assets/gallery/trends-cobra-dark.svg"><img alt="spf13/cobra over 200 commits: lines, complexity and duplicated lines, each with its slope per 100 commits" src="docs/assets/gallery/trends-cobra-light.svg"></picture>
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="docs/assets/gallery/reach-tokio-dark.svg"><img alt="tokio-rs/tokio: the functions that depend on what one commit changed, hop by hop along the call graph" src="docs/assets/gallery/reach-tokio-light.svg"></picture>
