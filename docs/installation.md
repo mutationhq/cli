@@ -55,18 +55,17 @@ Each [GitHub Release](https://github.com/mutationhq/cli/releases) carries one ar
 
 ## Updates
 
-`mutation` looks for a newer release once a day, in the same place it was installed from, and, by default, installs it in the background, so the next start runs it. It never takes a release published less than 24 hours earlier, a pre-release, or a version older than the one it runs. A command never waits for it, and its output and exit code never depend on it.
+`mutation` looks for a newer release once a day, in the same place it was installed from, and, by default, installs it in the background, so the next start runs it. It never takes a release published less than 24 hours earlier, a pre-release, or a version older than the one it runs. A command never waits for it, but for the one start after a release that installs it through npm (below). A command's own output and exit code never depend on it, while the npm launcher may print an update's notice on stderr.
 
 | Installed with | What happens |
 | --- | --- |
-| `npm install --global` (Linux, macOS) | `npm install --global --prefix <the same prefix> @mutationhq/cli@<version>`, run in the background, never with `sudo` |
-| `npm install --global` (Windows) | The same npm command, run by the `mutation` launcher before it starts the binary on the next start, since Windows cannot replace a program while it runs. That start waits for npm, once a release |
+| `npm install --global` | `npm install --global --prefix <the same prefix> @mutationhq/cli@<version>`, never with `sudo`, run by the `mutation` launcher before it starts the binary on the next start: Windows cannot replace a program while it runs, and one way serves every system. That start waits for npm, once a release. npm of a distribution's own layout (such as `/usr/share/nodejs`) is not used: there the launcher prints the command to run, and `update: notify` keeps to a daily notice |
 | pnpm, Bun or Yarn, globally | A notice with that manager's command |
 | Homebrew | The tap `mutationhq/tap` refreshed alone (`brew update-reset` of its repository), then `brew upgrade mutationhq/tap/mutation`, run in the background by the Homebrew that installed it, only when the tap holds that release; no other tap or formula is touched. Homebrew keeps managing the files |
 | An archive, unpacked in place | The new archive is downloaded, its signed `SHA256SUMS` and its checksum verified ([verifying releases](verifying-releases.md)), and the binary replaced. Keep `LICENSE-BINARY` beside the binary: a binary copied away from it is never replaced, only told of new versions |
 | `npx`, or a project's dependency | Nothing: npx and your lockfile choose the version |
 
-Where `mutation` cannot write its own folder, or an update fails, it tells you instead, once a day, on stderr when stderr is a terminal, with the command to run.
+Where `mutation` cannot write its own folder, or an update fails, it tells you instead, once a day, on stderr when stderr is a terminal, with the command to run; the npm launcher tells of an install that failed at the start that tried it.
 
 **In CI nothing of this runs**, not even the check: the version a pipeline installed is the one it runs. CI is recognized by `CI` and the variables each CI service sets (GitHub Actions, GitLab, Jenkins, Azure Pipelines, CircleCI, Buildkite and about 50 more, the list of [ci-info](https://github.com/watson/ci-info)). A pipeline that sets none of them should set `CI=true`, or `MUT_UPDATE=off`.
 

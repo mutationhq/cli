@@ -1,7 +1,7 @@
 Scope of this license (version 1.0, effective 2026-11-24)
 
 This license covers every file of this package, @mutationhq/cli: the
-launcher bin/mutation.mjs, package.json and README.md. It does not cover
+launcher's files under bin/, package.json and README.md. It does not cover
 the `mutation` program in executable form that the launcher runs, which
 comes in a platform package (@mutationhq/cli-<os>-<arch>) and is licensed
 only under the Mutation CLI License in that package's LICENSE-BINARY.
