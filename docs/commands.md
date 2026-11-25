@@ -1,6 +1,6 @@
 # Commands
 
-Every command below parses its arguments in full and refuses an invalid combination with exit 2. A command marked **Not implemented** then exits 5 (`not_implemented`), and `mutation --help` marks it the same way. Nothing on this page marked Not implemented works in 0.1.0.
+Every command parses its arguments in full and refuses an invalid combination with exit 2, before it does any work.
 
 Data goes to stdout; errors, progress and completeness go to stderr. Human text is the default, and a machine format is chosen with `--format`, never by whether stdout is a terminal.
 
@@ -12,7 +12,7 @@ Data goes to stdout; errors, progress and completeness go to stderr. Human text 
 | `--format F` | The format of the results: `text`, `json`, `jsonl`, `csv`, `graphml`, `sarif`, `codeclimate`, `markdown`, `html`, `xml`, as each command allows |
 | `--output FMT=FILE` | Also write the results as `FMT` to `FILE` (`verify`; repeatable). Written aside and renamed in place when whole |
 | `--threads N` | The CPUs the work uses (default: each CPU) |
-| `--no-update` | Answer from what the data file holds and never index; exit 4 past it |
+| `--no-index` | Answer from what the data file holds and never index; exit 4 past it |
 | `--config FILE` | A machine settings file read over the user's; it must exist |
 | `--color auto\|always\|never` | `auto` honours `NO_COLOR` and `CLICOLOR_FORCE` |
 | `-q`, `--quiet` | Print nothing on stderr but errors |
@@ -29,21 +29,21 @@ Data goes to stdout; errors, progress and completeness go to stderr. Human text 
 | A history | `--history A..B` or `--history N` | The first-parent commits of the span |
 | A folder without git | `PATH` | Its files as they are |
 
-## `index` (Not implemented)
+## `index`
 
 ```
 mutation index [PATH] [--at REV | --history SPAN]
 ```
 
-Index a revision, or each commit of a history, into the repository's data file (`.mutation/data.mt`), which every worktree of the repository shares. Other commands are designed to index what they read on their own; this one fills the data file ahead. Formats: `text`, `json`. Exits: 0 1 2 5 130.
+Index a revision, or each commit of a history, into the repository's data file (`.mutation/data.mt`), which every worktree of the repository shares. Other commands index what they read on their own; this one fills the data file ahead. Formats: `text`, `json`. Exits: 0 1 2 130.
 
-## `query <kind>` (Not implemented)
+## `query <kind>`
 
 ```
 mutation query <kind> ... [--at REV|A..B|worktree] [--rows N] [--exact] [--print-sql]
 ```
 
-Answer a question from the index. Each kind runs SQL from the index's catalog, and `--print-sql` shows it. Formats: `text`, `json`, `jsonl`, `csv`, `graphml`. Exits: 0 1 2 4 5 130.
+Answer a question from the index. Each kind runs SQL from the index's catalog, and `--print-sql` shows it. Formats: `text`, `json`, `jsonl`, `csv`, `graphml`. Exits: 0 1 2 4 130.
 
 | Kind | Answers |
 | --- | --- |
@@ -62,9 +62,9 @@ Answer a question from the index. Each kind runs SQL from the index's catalog, a
 | `metrics` | The measures of a file, a definition or the repository |
 | `catalog` | What the index holds: its tables, kinds and probes |
 
-A key is a definition's qualified name (`app::run`). One that names nothing, or several, is designed to exit 2 (`key_unknown`, `key_ambiguous`) with the nearest names. `--rows` limits the rows (1,000 by default); `--exact` makes an inexact answer exit 4.
+A key is a definition's qualified name (`app::run`). One that names nothing, or several, exits 2 (`key_unknown`, `key_ambiguous`) with the nearest names. `--rows` limits the rows (1,000 by default); `--exact` makes an inexact answer exit 4.
 
-## `verify` (Not implemented)
+## `verify`
 
 ```
 mutation verify [REV|A..B] [--patch FILE|- --at REV] [--workflow incremental|comprehensive]
@@ -79,7 +79,7 @@ Verify a change: run the probes of the workflow on the change and its base, comp
 - `--require complete` (the default) decides `incomplete` when required work did not complete; `any` accepts what was measured.
 - `--settings REV` reads `mutation.yml` at a pinned revision, as CI pins the target branch; otherwise the base's file is read.
 
-Formats: `text`, `json`, `sarif` (2.1.0), `codeclimate` (GitLab's Code Quality), `markdown`, `html` (one self-contained file). Exits: 0 1 2 3 4 5 130. The CLI writes files; it does not publish results to a git host.
+Formats: `text`, `json`, `sarif` (2.1.0), `codeclimate` (GitLab's Code Quality), `markdown`, `html` (one self-contained file). Exits: 0 1 2 3 4 130. The CLI writes files; it does not publish results to a git host.
 
 ```sh
 mutation verify main..HEAD --format sarif > results.sarif
@@ -87,23 +87,23 @@ git diff | mutation verify --patch - --at main
 mutation verify --workflow comprehensive HEAD --output html=report.html
 ```
 
-## `context` (Not implemented)
+## `context`
 
 ```
 mutation context [TARGET...] [--at REV|A..B|worktree] [--budget N] [--depth N]
 ```
 
-Give the code around targets for an agent, within a budget of tokens (8,000 by default; tokens estimated as UTF-8 bytes divided by 4), up to `--depth` hops (2 by default). Without a target, the worktree's changes. Each excerpt carries its path and original lines. Formats: `markdown`, `xml`, `json`. Exits: 0 1 2 4 5 130.
+Give the code around targets for an agent, within a budget of tokens (8,000 by default; tokens estimated as UTF-8 bytes divided by 4), up to `--depth` hops (2 by default). Without a target, the worktree's changes. Each excerpt carries its path and original lines. Formats: `markdown`, `xml`, `json`. Exits: 0 1 2 4 130.
 
-## `watch` (Not implemented)
+## `watch`
 
 ```
 mutation watch [--workflow incremental|comprehensive] [--probes IDS]
 ```
 
-Verify the worktree each time it changes, one JSON line an event, each with its input's identity. Format: `jsonl`. Exits: 0 1 2 5 130.
+Verify the worktree each time it changes, one JSON line an event, each with its input's identity. Format: `jsonl`. Exits: 0 1 2 130.
 
-## `config` (Built)
+## `config`
 
 | Subcommand | What it does | Exits |
 | --- | --- | --- |
@@ -114,7 +114,7 @@ Verify the worktree each time it changes, one JSON line an event, each with its 
 
 Formats: `text`, `json`. See [configuration](configuration.md).
 
-## `completions` (Built)
+## `completions`
 
 ```sh
 mutation completions bash > ~/.local/share/bash-completion/completions/mutation
@@ -128,9 +128,9 @@ Shells: `bash`, `zsh`, `fish`, `powershell`, `elvish`. Exits: 0 2.
 
 Measurements for Mutation's own benchmarks. Their arguments and output change between releases without notice; scripts should not depend on them.
 
-| Command | Status |
+| Command | What it does |
 | --- | --- |
-| `debug index` | Built: reads a folder or commits and prints its figures |
-| `debug shares` | Built: prints the tree of memory's accounts |
-| `debug detect [PATH]` | Built: each file's language and the step that decided, one JSON line a file |
-| `debug data verify [--at REV]` | Not implemented |
+| `debug index` | Reads a folder or commits and prints its figures |
+| `debug shares` | Prints the tree of memory's accounts |
+| `debug detect [PATH]` | Each file's language and the step that decided, one JSON line a file |
+| `debug data verify [--at REV]` | Checks the data file's records against their digests |

@@ -21,7 +21,7 @@ Version 1.3, effective 2026-11-25. Every legal document of `mutation`, what it c
 
 The licence defines these, and every document here uses them in the same sense: **Mutation**, **Software**, **Open Files**, **Unauthentic Copy**, **Compromise Event**, **You**, **Consumer**, **Business User**, **Official Channels**, **Pipeline Use**, **Repository**, **Private Repository**, **Public Repository**, **Personal Non-Commercial Project**, **Runner License**, **Order**, **Order Terms**, **Output**, **Telemetry**, **Privacy Notice** (this repository's [privacy notice](privacy.md)) and **Feedback**. See section 1 of [`LICENSE-BINARY`](../LICENSE-BINARY), and section 20 for Feedback.
 
-## To fill before 0.1.0
+## To fill before a release
 
 Every value still to be decided is written as its name in capitals between two pairs of square brackets, one name per fact, so that a release check can refuse any file that still holds two opening square brackets. Each must be filled, in every file that holds it, before 0.1.0 is published, and its row removed from this table:
 

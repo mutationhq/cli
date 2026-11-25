@@ -173,11 +173,11 @@ On GitLab, `--format codeclimate` gives the Code Quality report. `--settings` re
 | `config show\|validate\|schema\|init` | Show, check, describe or write the settings |
 | `completions SHELL` | Write a shell's completions: bash, zsh, fish, PowerShell, elvish |
 
-Global options: `-C DIR`, `--format`, `--output FMT=FILE`, `--threads N`, `--no-update`, `--config FILE`, `--color auto|always|never`, `--quiet`. Every flag and format is in [commands](docs/commands.md).
+Global options: `-C DIR`, `--format`, `--output FMT=FILE`, `--threads N`, `--no-index`, `--config FILE`, `--color auto|always|never`, `--quiet`. Every flag and format is in [commands](docs/commands.md).
 
 ## Configuration
 
-The repository's settings live in `mutation.yml` (the first present of `.github/`, `.gitlab/`, then the root): invariants the code must hold, ignored paths, and how a review speaks on a host. `mutation config init` writes one with every default, and `mutation config validate` checks it with each error's line and column. The machine's settings (`threads`, `format`, `color`, `data`, `spill`) come from the user's `config.yml`, `MUT_*` variables and flags, in that order of precedence. An unknown key or variable is refused with exit 2. See [configuration](docs/configuration.md).
+The repository's settings live in `mutation.yml` (the first present of `.github/`, `.gitlab/`, then the root): invariants the code must hold, ignored paths, and how a review speaks on a host. `mutation config init` writes one with every default, and `mutation config validate` checks it with each error's line and column. The machine's settings (`threads`, `format`, `color`, `data`, `spill`, `update`) come from the user's `config.yml`, `MUT_*` variables and flags, in that order of precedence. An unknown key or variable is refused with exit 2. See [configuration](docs/configuration.md).
 
 ## Exit codes
 
@@ -202,6 +202,8 @@ See [exit codes](docs/exit-codes.md) for the error codes and which exit wins whe
 | Windows, x64 | `@mutationhq/cli-win32-x64` |
 
 Each build is one native binary with no runtime dependency. Archives for each platform are attached to each [GitHub Release](https://github.com/mutationhq/cli/releases), with a signed `SHA256SUMS` ([verifying releases](docs/verifying-releases.md)). Intel Macs, musl-based Linux (Alpine) and Windows on ARM are not supported. See [installation](docs/installation.md), including the CPU features each build requires.
+
+`mutation` updates itself from where you installed it, a day after a release at the earliest, and never in CI; `update: notify` or `update: off` in your `config.yml`, or `MUT_UPDATE`, changes that ([updates](docs/installation.md#updates)).
 
 ## Documentation
 

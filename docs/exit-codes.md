@@ -8,13 +8,11 @@ Every command exits with one of these codes. Scripts and CI can tell a failing v
 | 1 | Failed: I/O, an output not written, a corrupt or incompatible data file | `io`, `output`, `corrupt`, `incompatible` |
 | 2 | Usage: arguments, configuration, or a revision, key or patch that does not resolve | `usage`, `config`, `revision_unknown`, `key_unknown`, `key_ambiguous`, `patch_rejected` |
 | 3 | `verify` decided `fail` | `findings` |
-| 4 | Incomplete: an answer under `--exact`, `--no-update` past what is stored, `context` past its budget, `verify` decided `incomplete` | `inexact`, `not_indexed`, `over_budget`, `incomplete` |
-| 5 | Not implemented | `not_implemented` |
+| 4 | Incomplete: an answer under `--exact`, `--no-index` past what is stored, `context` past its budget, `verify` decided `incomplete` | `inexact`, `not_indexed`, `over_budget`, `incomplete` |
+| 5 | A feature this build does not have | `not_implemented` |
 | 130 | Interrupted (Ctrl-C); the message names the phase reached | `interrupted` |
 
 When several apply, the first of 2, 5, 1, 130, 3, 4 is the exit code.
-
-In 0.1.0, `index`, `query`, `verify`, `context`, `watch` and `debug data verify` check their arguments and then exit 5. Codes 3 and 4 come from those commands, so 0.1.0 does not produce them.
 
 ## Error output
 
@@ -29,7 +27,7 @@ mutation: MUT_THRAEDS is no variable of mutation (config)
 Under a machine format (`--format json`, for example), the error is one JSON line instead:
 
 ```json
-{"format":{"name":"mutation-error","version":1},"exit":5,"error":{"code":"not_implemented","message":"mutation query callers is not implemented yet","fix":"..."}}
+{"format":{"name":"mutation-error","version":1},"exit":2,"error":{"code":"key_unknown","message":"app::rnu names no definition","fix":"..."}}
 ```
 
 Scripts should match the `code`, never the message, which may change.

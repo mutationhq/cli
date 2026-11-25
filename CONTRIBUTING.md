@@ -22,7 +22,6 @@ Include:
 
 Leave out credentials and private code. If the problem only shows on a private repository, describe its shape (size, languages, number of files) instead of sharing it.
 
-A command that exits 5 (`not_implemented`) is expected in 0.1.0; a feature request is the place to say you need it.
 
 ## Pull requests
 

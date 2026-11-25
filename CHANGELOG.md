@@ -4,11 +4,11 @@ Every notable change to the `mutation` CLI, and to its [legal documents](docs/le
 
 ## [Unreleased]
 
-The first release, planned as 0.1.0. Most commands are not built yet and exit 5 (`not_implemented`).
+The first release.
 
 ### Added
 
-- The full command surface: `index`, `query` with its 14 kinds, `verify`, `context`, `watch`, `config`, `completions` and `debug`. Every command, flag and kind parses and checks its arguments; a command not built then exits 5, and `mutation --help` marks it.
+- The full command surface: `index`, `query` with its 14 kinds, `verify`, `context`, `watch`, `config`, `completions` and `debug`. Every command, flag and kind parses and checks its arguments before it does any work.
 - `mutation config show`, `validate`, `schema` and `init` for the repository's `mutation.yml` and the machine's `config.yml`, with `MUT_*` variables and a stated precedence. Unknown keys and variables are refused.
 - `mutation completions` for bash, zsh, fish, PowerShell and elvish.
 - `mutation debug index`, `debug shares` and `debug detect`: measurements, unstable across releases.
@@ -28,7 +28,7 @@ The first release, planned as 0.1.0. Most commands are not built yet and exit 5 
 - The [privacy notice](docs/privacy.md) 1.0: no version sends anything yet; the rules Telemetry will follow: always on in the free Software, opt-out under a paid agreement (`telemetry: off`, `MUT_TELEMETRY=off`, `DO_NOT_TRACK=1`).
 - `SECURITY.md` 1.0: the coordinated vulnerability disclosure policy, with response times, advisories, Cyber Resilience Act notifications, good-faith research, compromise handling and the support period.
 - `CONTRIBUTING.md` 1.0: pull requests are MIT with a DCO sign-off; issues and other feedback are licensed to Mutation as Feedback.
-- [Legal documents](docs/legal.md): each document, its version, whom it binds, and the placeholders to fill before 0.1.0.
+- [Legal documents](docs/legal.md): each document, its version, whom it binds, and the placeholders to fill before a release.
 - Each release must carry, and the release must refuse to publish without:
   - `THIRD-PARTY-NOTICES`, the same for all four platforms, covering: every crate linked into the binary with its own licence text and copyright line; the Rust standard library at the pinned toolchain (`COPYRIGHT`, `LICENSE-MIT`, `LICENSE-APACHE`); GitHub Linguist v9.7.0's `LICENSE`, for its data compiled into the language detection tables; jemalloc's `COPYING` (BSD-2-Clause) and libdeflate's `COPYING` (MIT); the MIT text with the upstream copyright line for the Apple crates `objc2`, `objc2-encode`, `block2` and `dispatch2`, which ship no licence file; the Unicode-3.0 licence, the WHATWG BSD-3-Clause text of `encoding_rs` and the Apache-2.0 text; and the MPL-2.0 text;
   - the MPL-2.0 source offer for `option-ext` 0.2.0, included unmodified: its source at crates.io and as `option-ext-0.2.0.crate` attached to the release, and on request to support@mutation.sh for at least three years;
@@ -38,6 +38,3 @@ The first release, planned as 0.1.0. Most commands are not built yet and exit 5 
   - no published file that holds two opening square brackets, the form of the placeholders [legal documents](docs/legal.md) lists.
 - `docs/installation.md` warns that the unscoped npm package `mutation` is someone else's, and gives Homebrew's full name `mutationhq/tap/mutation` only.
 
-### Not implemented in this release
-
-- `index`, `query`, `verify`, `context`, `watch` and `debug data verify` exit 5 after checking their arguments.

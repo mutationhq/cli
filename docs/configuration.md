@@ -29,7 +29,7 @@ An invalid file never stops a run: the defaults apply, and the result names the 
 
 ### Which revision's settings
 
-By default, `verify` is designed to read the settings at the **base** of the change (marked `local`), so a change cannot rewrite the settings it is verified against. In CI, `--settings REV` reads them at a revision you pin, such as the target branch's tip (marked `pinned`). Every result records the settings' revision, path, SHA-256 and trust.
+By default, `verify` reads the settings at the **base** of the change (marked `local`), so a change cannot rewrite the settings it is verified against. In CI, `--settings REV` reads them at a revision you pin, such as the target branch's tip (marked `pinned`). Every result records the settings' revision, path, SHA-256 and trust.
 
 ## The machine's settings
 
@@ -40,6 +40,7 @@ By default, `verify` is designed to read the settings at the **base** of the cha
 | `color` | `MUT_COLOR` | `auto` | `auto`, `always` or `never` |
 | `data` | `MUT_DATA` | the repository's `.mutation/data.mt` | The data file |
 | `spill` | `MUT_SPILL` | the system's temporary folder | Where work past memory's share is written |
+| `update` | `MUT_UPDATE` | `auto` | `auto` installs a newer release in the background a day after it was published, `notify` tells of it on stderr once a day, `off` does neither ([updates](installation.md#updates)) |
 | | `MUT_CONFIG` | | A settings file read over the user's; it must exist |
 
 The user's file:
@@ -61,6 +62,8 @@ Each layer overrides the one before it:
 5. Flags
 
 Any other variable starting with `MUT_` is refused with exit 2 (`config`), naming the allowed ones, so a misspelled variable does not pass unnoticed. `mutation config show` prints each value with where it came from.
+
+`NO_UPDATE_NOTIFIER`, set to anything, means `update: off`, as it does for the many npm programs that honour it; `MUT_UPDATE` wins over it. A repository's `mutation.yml` cannot set `update`.
 
 ```yaml
 # config.yml

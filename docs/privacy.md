@@ -1,6 +1,6 @@
 # Privacy notice: the `mutation` CLI
 
-Version 1.2, effective 2026-11-25. Applies to `mutation` 0.1.0 and later until a new version of this notice replaces it. This is the Privacy Notice that the [Mutation CLI License](../LICENSE-BINARY) (section 7) refers to; capitalized terms (Software, Telemetry, Official Channels) mean what the licence defines.
+Version 1.3, effective 2026-11-25. Applies to `mutation` 0.1.0 and later until a new version of this notice replaces it. This is the Privacy Notice that the [Mutation CLI License](../LICENSE-BINARY) (section 7) refers to; capitalized terms (Software, Telemetry, Official Channels) mean what the licence defines.
 
 ## Who we are
 
@@ -8,13 +8,15 @@ Mutation.sh ("Mutation") is responsible for the processing this notice describes
 
 ## Your code stays on your machine
 
-`mutation` reads your repositories and writes its results on your machine. It does not send your code, file names, paths, repository names, queries or results to Mutation or anyone else, unless you use a feature that you start for the purpose of sending them to a Mutation service, which then has its own terms. Mutation does not process the personal data that may be inside your repositories; you decide what to run it on.
+`mutation` reads your repositories and writes its results on your machine. Its one network feature is its update, below. It does not send your code, file names, paths, repository names, queries or results to Mutation or anyone else, unless you use a feature that you start for the purpose of sending them to a Mutation service, which then has its own terms. Mutation does not process the personal data that may be inside your repositories; you decide what to run it on.
 
 ## What each version sends
 
 | Versions | Network feature | What is sent | To whom | Why | How to turn it off |
 | --- | --- | --- | --- | --- | --- |
-| 0.1.0 and later, until a row below says otherwise | None | Nothing: these versions are built to open no network connection of their own | | | |
+| 0.1.0 and later, until a row below says otherwise | Update check: at most once a day, never in CI; runs `curl` in the background | An HTTPS GET of the latest release's details, with the User-Agent `mutation/<version>`: from the npm registry (`registry.npmjs.org`, the packages `@mutationhq/cli` and `@mutationhq/cli-<os>-<arch>`) when installed with npm, pnpm, Bun or Yarn; from GitHub's API (`api.github.com`) when installed with Homebrew or from an archive. Nothing else: no identifier, no path, nothing of your repositories | npm, Inc. (GitHub) or GitHub, Inc., under their own privacy statements; they receive your IP address with the connection | To tell you of, or install, a newer release | `update: off` in `config.yml`, `MUT_UPDATE=off` or `NO_UPDATE_NOTIFIER=1` ([installation](installation.md#updates)) |
+| 0.1.0 and later, until a row below says otherwise | Automatic update (`update: auto`, the default), from an archive | HTTPS GETs of the release's `SHA256SUMS`, its signature and the archive for your platform from `github.com`, which redirects to GitHub's storage, with the User-Agent `mutation/<version>` | GitHub, Inc., as above | To install the newer release | `update: notify` or `update: off`, or the controls above |
+| 0.1.0 and later, until a row below says otherwise | Automatic update (`update: auto`, the default), through npm | `mutation` runs `npm install --global` for the new version; npm fetches it from the registry it is configured with, with npm's own headers and credentials, as when you install a package | Your npm registry (by default npm, Inc.) | To install the newer release | `update: notify` or `update: off`, or the controls above |
 
 A version sends nothing that this table does not list for it. Each later version that adds a network feature, or Telemetry, adds a row here, and updates this notice, before it is released.
 

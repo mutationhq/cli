@@ -1,7 +1,5 @@
 # Installation
 
-> Version 0.1.0 is not published yet. Each method below describes how `mutation` will install once it is.
-
 By installing or using `mutation` you accept the [Mutation CLI License](../LICENSE-BINARY): `mutation` is free for personal and commercial use in a person's workstation development session, including agents and git hooks within that session. Pipeline Use is free for Public Repositories and Personal Non-Commercial Projects. Other Pipeline Use requires a paid Runner License from [mutation.sh/pricing](https://mutation.sh/pricing) after one 15-day evaluation per organization or independent individual. Hosted and self-hosted workflows are treated alike. Licensing is a legal requirement; the Software performs no license check. See sections 1.14–1.17 and 3.4 of the [licence](../LICENSE-BINARY) for the definitions and evaluation rules. The licence states the rest of its rights and limits. The [privacy notice](privacy.md) says what each version sends over a network.
 
 > [!WARNING]
@@ -53,7 +51,26 @@ A copy fetched through a registry mirror, your organization's npm proxy, a CDN s
 
 ## Archives
 
-Each [GitHub Release](https://github.com/mutationhq/cli/releases) will carry one archive per platform: `mutation-<version>-<os>-<arch>.tar.gz`, and `.zip` on Windows. Each holds the binary, `LICENSE-BINARY` (its licence), `THIRD-PARTY-NOTICES`, `README.md` and `LICENSE` (the MIT licence of that README). Check the archive before you unpack it ([verifying releases](verifying-releases.md)), then put `mutation` on your `PATH`.
+Each [GitHub Release](https://github.com/mutationhq/cli/releases) carries one archive per platform: `mutation-<version>-macos-arm64.tar.gz`, `mutation-<version>-linux-x64.tar.gz`, `mutation-<version>-linux-arm64.tar.gz` and `mutation-<version>-windows-x64.zip`. Each holds, at its root, the binary, `LICENSE-BINARY` (its licence), `THIRD-PARTY-NOTICES`, `README.md` and `LICENSE` (the MIT licence of that README). Check the archive before you unpack it ([verifying releases](verifying-releases.md)), then put the folder on your `PATH`, keeping its files together so that `mutation` can [update](#updates) itself there.
+
+## Updates
+
+`mutation` looks for a newer release once a day, in the same place it was installed from, and, by default, installs it in the background, so the next start runs it. It never takes a release published less than 24 hours earlier, a pre-release, or a version older than the one it runs. A command never waits for it, and its output and exit code never depend on it.
+
+| Installed with | What happens |
+| --- | --- |
+| `npm install --global` (Linux, macOS) | `npm install --global --prefix <the same prefix> @mutationhq/cli@<version>`, run in the background, never with `sudo` |
+| `npm install --global` (Windows) | A notice with the npm command: Windows cannot replace a program while it runs |
+| pnpm, Bun or Yarn, globally | A notice with that manager's command |
+| Homebrew | A notice: `brew upgrade mutationhq/tap/mutation`. Homebrew upgrades its own formulae |
+| An archive, unpacked in place | The new archive is downloaded, its signed `SHA256SUMS` and its checksum verified ([verifying releases](verifying-releases.md)), and the binary replaced. Keep `LICENSE-BINARY` beside the binary: a binary copied away from it is never replaced, only told of new versions |
+| `npx`, or a project's dependency | Nothing: npx and your lockfile choose the version |
+
+Where `mutation` cannot write its own folder, or an update fails, it tells you instead, once a day, on stderr when stderr is a terminal, with the command to run.
+
+**In CI nothing of this runs**, not even the check: the version a pipeline installed is the one it runs. CI is recognized by `CI` and the variables each CI service sets (GitHub Actions, GitLab, Jenkins, Azure Pipelines, CircleCI, Buildkite and about 50 more, the list of [ci-info](https://github.com/watson/ci-info)). A pipeline that sets none of them should set `CI=true`, or `MUT_UPDATE=off`.
+
+To turn updates off: `update: off` in your `config.yml` ([configuration](configuration.md)), `MUT_UPDATE=off`, or `NO_UPDATE_NOTIFIER=1`; `update: notify` keeps the notices without installing. The checks need `curl`, which macOS, Windows 10 and later and Linux distributions include. What they send is in the [privacy notice](privacy.md). Their state is a small file in your cache folder: `~/Library/Caches/mutation` on macOS, `$XDG_CACHE_HOME/mutation` or `~/.cache/mutation` on Linux, `%LOCALAPPDATA%\mutation` on Windows.
 
 ## Shell completions
 
@@ -69,4 +86,4 @@ npm uninstall --global @mutationhq/cli
 brew uninstall mutationhq/tap/mutation
 ```
 
-Mutation keeps its data in each repository's `.mutation/` folder and its settings in the user's `config.yml` ([configuration](configuration.md)); remove them by hand if you want them gone.
+Mutation keeps its data in each repository's `.mutation/` folder, its settings in the user's `config.yml` ([configuration](configuration.md)) and the state of its updates in the cache folder named under [updates](#updates); remove them by hand if you want them gone.

@@ -2,8 +2,6 @@
 
 The command line of [Mutation](https://mutation.sh): a person or an agent verifies a mutation (a commit, a change request, the worktree's edits) and queries the System State of a repository with standard SQL (SQL/PGQ) or openCypher.
 
-**In development:** most commands answer Not Implemented (exit 5) in 0.1.0. What is built and what is planned: [mutationhq/cli](https://github.com/mutationhq/cli#status).
-
 By installing or using `mutation` you accept the [Mutation CLI License](https://github.com/mutationhq/cli/blob/main/LICENSE-BINARY). The npm package named `mutation` without a scope is not Mutation's: install `@mutationhq/cli`.
 
 ```sh

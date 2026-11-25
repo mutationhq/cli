@@ -41,14 +41,14 @@ Mutation never asks you to install it from anywhere else: not from a link in an 
 
 ## Verifying a release
 
-Starting with 0.1.0, each release carries a `SHA256SUMS` file, a cosign signature of it made with the release key (`cosign.pub` in this repository's root, published with 0.1.0), and a provenance statement for each archive. The macOS binary is signed with an Apple Developer ID and notarized; the Windows binary is signed with Authenticode. Before you use a download:
+Each release carries a `SHA256SUMS` file, a cosign signature of it made with the release key (`cosign.pub` in this repository's root), and a provenance statement for each archive. The macOS binary is signed with an Apple Developer ID and notarized; the Windows binary is signed with Authenticode. Before you use a download:
 
 ```sh
 cosign verify-blob --key cosign.pub --bundle SHA256SUMS.sigstore.json SHA256SUMS
 sha256sum --check --ignore-missing SHA256SUMS    # macOS: shasum -a 256 --check --ignore-missing SHA256SUMS
 ```
 
-From 0.1.0, the fingerprint of `cosign.pub` is also published at https://mutation.sh/security, so you can check the key independently of this repository. [Verifying releases](docs/verifying-releases.md) has every step. A file that fails any of them may have been tampered with: do not run it, and report it to support@mutation.sh. Whether you check is your decision; for business use, the risk of not checking is yours (section 8.4 of the licence).
+The fingerprint of `cosign.pub` is also published at https://mutation.sh/security, so you can check the key independently of this repository. [Verifying releases](docs/verifying-releases.md) has every step. A file that fails any of them may have been tampered with: do not run it, and report it to support@mutation.sh. Whether you check is your decision; for business use, the risk of not checking is yours (section 8.4 of the licence).
 
 ## Compromise of a release or channel
 
