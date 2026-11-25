@@ -14,7 +14,7 @@
 
 1. npm installs `@mutationhq/cli` and reads its optional dependencies.
 2. Each platform package declares `os`, `cpu` and, on Linux, `libc: ["glibc"]`, so npm (and pnpm, Yarn, Bun) installs only the one that matches the machine and skips the others. No install script runs.
-3. `mutation` runs the launcher, which finds the matching package with Node's `require.resolve`, starts its binary with the same arguments and stdio, forwards SIGINT and SIGTERM, and exits with the binary's exit code. If the binary was ended by a signal, the launcher raises that signal on itself, so the shell sees what it would have seen without Node in between.
+3. `mutation` runs the launcher, which finds the matching package with Node's `require.resolve`, starts its binary with the same arguments and stdio, forwards SIGINT and SIGTERM, and exits with the binary's exit code. If the binary was ended by a signal, the launcher raises that signal on itself, so the shell sees what it would have seen without Node in between. On Windows it first installs an update that the binary left for it, since Windows cannot replace the binary while it runs ([updates](../docs/installation.md#updates)).
 4. When no package matches (an unsupported system, musl, or optional dependencies omitted), the launcher names the supported platforms and exits 1.
 
 `preferUnplugged: true` tells Yarn Plug'n'Play to keep each binary on disk where it can be executed.

@@ -60,9 +60,9 @@ Each [GitHub Release](https://github.com/mutationhq/cli/releases) carries one ar
 | Installed with | What happens |
 | --- | --- |
 | `npm install --global` (Linux, macOS) | `npm install --global --prefix <the same prefix> @mutationhq/cli@<version>`, run in the background, never with `sudo` |
-| `npm install --global` (Windows) | A notice with the npm command: Windows cannot replace a program while it runs |
+| `npm install --global` (Windows) | The same npm command, run by the `mutation` launcher before it starts the binary on the next start, since Windows cannot replace a program while it runs. That start waits for npm, once a release |
 | pnpm, Bun or Yarn, globally | A notice with that manager's command |
-| Homebrew | A notice: `brew upgrade mutationhq/tap/mutation`. Homebrew upgrades its own formulae |
+| Homebrew | The tap `mutationhq/tap` refreshed alone (`brew update-reset` of its repository), then `brew upgrade mutationhq/tap/mutation`, run in the background by the Homebrew that installed it, only when the tap holds that release; no other tap or formula is touched. Homebrew keeps managing the files |
 | An archive, unpacked in place | The new archive is downloaded, its signed `SHA256SUMS` and its checksum verified ([verifying releases](verifying-releases.md)), and the binary replaced. Keep `LICENSE-BINARY` beside the binary: a binary copied away from it is never replaced, only told of new versions |
 | `npx`, or a project's dependency | Nothing: npx and your lockfile choose the version |
 
