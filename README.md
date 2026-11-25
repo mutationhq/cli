@@ -194,14 +194,11 @@ See [exit codes](docs/exit-codes.md) for the error codes and which exit wins whe
 
 ## Platforms
 
-| Platform | npm package |
-| --- | --- |
-| macOS, ARM64 (Apple silicon) | `@mutationhq/cli-darwin-arm64` |
-| Linux, x64, glibc 2.28 or newer | `@mutationhq/cli-linux-x64` |
-| Linux, ARM64, glibc 2.28 or newer | `@mutationhq/cli-linux-arm64` |
-| Windows, x64 | `@mutationhq/cli-win32-x64` |
+- macOS on Apple silicon
+- Linux x64 and ARM64, glibc 2.28 or newer
+- Windows x64
 
-Each build is one native binary with no runtime dependency. Archives for each platform are attached to each [GitHub Release](https://github.com/mutationhq/cli/releases), with a signed `SHA256SUMS` ([verifying releases](docs/verifying-releases.md)). Intel Macs, musl-based Linux (Alpine) and Windows on ARM are not supported. See [installation](docs/installation.md), including the CPU features each build requires.
+`npm install --global @mutationhq/cli` picks the build for your platform. Each build is one native binary with no runtime dependency. Archives for each platform are attached to each [GitHub Release](https://github.com/mutationhq/cli/releases), with a signed `SHA256SUMS` ([verifying releases](docs/verifying-releases.md)). Intel Macs, musl-based Linux (Alpine) and Windows on ARM are not supported. See [installation](docs/installation.md), including the CPU features each build requires.
 
 `mutation` updates itself from where you installed it, a day after a release at the earliest, and never in CI; `update: notify` or `update: off` in your `config.yml`, or `MUT_UPDATE`, changes that ([updates](docs/installation.md#updates)).
 
