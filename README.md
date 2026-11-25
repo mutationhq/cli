@@ -29,6 +29,9 @@ mutation verify                          # in any git repository: your uncommitt
 
 No install: `npx @mutationhq/cli verify`. Builds for macOS on Apple silicon, Linux x64 and ARM64, and Windows x64 ([platforms](#platforms)).
 
+> [!TIP]
+> **Prefer it hosted?** [Mutation](https://mutation.sh) runs the same verification as a service on every pull request and merge request, on GitHub, GitLab and other git hosts, with results in the review and a console for your team. Get it at [mutation.sh](https://mutation.sh).
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/verify-dark.svg">
   <img alt="Illustration of mutation verify main..HEAD: one new blocking finding, an invariant whose target is reached without its guard, shown with its call path; the decision is fail and the exit code 3" src="docs/assets/verify-light.svg">
@@ -144,6 +147,8 @@ On GitLab, `--format codeclimate` gives the Code Quality report. `--settings` re
 
 > [!NOTE]
 > **CI/CD for a private repository requires a Runner License after the evaluation, unless the repository is part of a Personal Non-Commercial Project.** `mutation` is free for personal and commercial use in a person's workstation development session, including agents and git hooks within that session. Pipeline Use is free for Public Repositories and Personal Non-Commercial Projects. Other Pipeline Use requires a paid Runner License from [mutation.sh/pricing](https://mutation.sh/pricing) after one 15-day evaluation per organization or independent individual. Hosted and self-hosted workflows are treated alike. Licensing is a legal requirement; the Software performs no license check. See sections 1.14–1.17 and 3.4 of the [licence](LICENSE-BINARY) for the definitions and evaluation rules.
+
+Rather not run it yourself? [Mutation](https://mutation.sh) as a service verifies each pull request for you, with no runner to set up.
 
 ## Commands
 
