@@ -8,7 +8,6 @@
   <a href="#how-it-works">How it works</a> ·
   <a href="#use-it-with-coding-agents">Agents</a> ·
   <a href="#use-it-in-cicd">CI/CD</a> ·
-  <a href="#limits">Limits</a> ·
   <a href="docs/commands.md">Commands</a> ·
   <a href="#license">License</a>
 </p>
@@ -94,14 +93,6 @@ mutation verify main..HEAD                       # the change from main to HEAD
 | Any revision or patch, no checkout | | | | | ✓ |
 
 What each kind is usually built for; tools within a kind differ.
-
-## Limits
-
-- **It answers and decides; it does not edit.** It is not an editor, a language server or a bot that comments on pull requests. The CLI writes files and exit codes and publishes nothing to a git host.
-- **Static links only.** Callers, impact and paths follow the links in the code; calls made through reflection or built at run time are not seen. Uses whose target is not one definition are listed as undecided (`undecided` in SQL) rather than guessed.
-- **Bounded answers say they are bounded.** `--rows` (1,000 by default) and `impact --bound` (64 hops by default) cut an answer, and the answer says where; `--exact` makes a cut answer exit 4. `context` estimates tokens as UTF-8 bytes divided by 4.
-- **A finding's confidence is shown, never used to decide.** Only blocking findings, as `--fail-on` counts them, change the decision.
-- **Not every system.** Intel Macs, musl-based Linux (Alpine) and Windows on ARM are not supported. The source of `mutation` is not public.
 
 ## Use it with coding agents
 
