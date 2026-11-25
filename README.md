@@ -87,20 +87,15 @@ mutation verify main..HEAD                       # the change from main to HEAD
 
 ## How it compares
 
-By capability, against the kinds of tools people use for the same questions. This describes what each kind is usually built for, not a test of any one tool: tools within a kind differ, and many teams use several kinds together. ✓ means the kind is built for it; "some" means some tools of the kind do it; a blank means it is outside the kind's usual scope.
-
-| | Text search, language servers | SAST scanners | Code-graph MCP servers | Context packers | `mutation` |
+| | Language servers | SAST scanners | Code-graph MCP | Context packers | `mutation` |
 | --- | --- | --- | --- | --- | --- |
-| Definitions, references, callers | ✓ (language servers) | | ✓ | | ✓ |
-| Impact and call paths across the repository | some | some | ✓ | | ✓ |
-| Questions in a standard query language | | own rule languages | some (Cypher) | | SQL with SQL/PGQ, openCypher |
-| A pass or fail decision on a change against its base | | ✓ | some | | ✓ |
-| Distinct exit codes for a failing change, a tool error and an incomplete answer | | some | | | ✓ |
-| SARIF and GitLab Code Quality reports | | ✓ | some | | ✓ |
+| Callers, references, impact | ✓ | | ✓ | | ✓ |
+| SQL and openCypher over the code | | | some | | ✓ |
+| Pass or fail on a change against its base | | ✓ | | | ✓ |
 | Code for an agent within a token budget | | | some | ✓ | ✓ |
-| Any revision, comparison or patch, without a checkout | | some | some | some | ✓ |
-| Security rules maintained for many frameworks | | ✓ | | | |
-| Runs locally | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Any revision or patch, no checkout | | | | | ✓ |
+
+What each kind is usually built for; tools within a kind differ.
 
 ## Limits
 
