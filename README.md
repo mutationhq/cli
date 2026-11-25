@@ -223,7 +223,3 @@ What `mutation` sends over a network, including its Telemetry and the controls a
 ## Export
 
 The `mutation` binaries compute SHA-1 and SHA-256 hashes and contain no encryption for data confidentiality. You are responsible for complying with the export control and sanctions laws that apply to you; see section 14 of the [Mutation CLI License](LICENSE-BINARY).
-
-## Trademarks
-
-Mutation and the Mutation logo are trademarks of Mutation. Neither the MIT License nor the Mutation CLI License grants any right to use them, except to refer accurately to Mutation and its CLI. Do not publish a package, formula, image, binary or download under the Mutation name or a confusingly similar one. npm, Homebrew, GitHub, Apple, macOS, Windows and the other names here belong to their owners; their use does not imply endorsement.
