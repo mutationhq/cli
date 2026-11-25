@@ -83,8 +83,6 @@ mutation verify main..HEAD                       # the change from main to HEAD
 
 `mutation` is built on **Lingua**, Mutation's own lexers and parsers; it does not use tree-sitter. Files stream through it once. The graph it builds (definitions, references, calls, imports, metrics and history) is stored in one data file, and every command answers from that file rather than by reading the source again, so the same question at the same revision gets the same answer for each caller. Which languages the graph covers is listed by `mutation query catalog`.
 
-**Measured.** The lexers on one CPU core of an Apple M-series Mac, 2026-11-21, best of five runs over about 4 MB of each language from Mutation's test corpora: Rust 1.24 GB/s; C 0.93, C++ 0.82, C# 1.04, Swift 0.99, Haskell 0.95, Lua 0.88, Ruby 0.93, SQL 0.80 and PHP 0.78 GB/s. Lexing is the first step of indexing, not the whole of it; these are not end-to-end times, and the harness is Mutation's own, not public.
-
 ## How it compares
 
 | | Language servers | SAST scanners | Code-graph MCP | Context packers | `mutation` |
