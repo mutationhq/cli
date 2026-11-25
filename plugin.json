@@ -1,0 +1,8 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "mutation",
+  "description": "Verify code changes and query a repository's code graph (callers, impact, SQL, openCypher) with the Mutation CLI.",
+  "license": "MIT",
+  "homepage": "https://mutation.sh",
+  "repository": "https://github.com/mutationhq/cli"
+}

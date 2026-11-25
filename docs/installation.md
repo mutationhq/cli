@@ -2,7 +2,7 @@
 
 > Version 0.1.0 is not published yet. Each method below describes how `mutation` will install once it is.
 
-By installing or using `mutation` you accept the [Mutation CLI License](../LICENSE-BINARY): free of charge for any use, with the rights and limits it states. The [privacy notice](privacy.md) says what each version sends over a network.
+By installing or using `mutation` you accept the [Mutation CLI License](../LICENSE-BINARY): `mutation` is free for personal and commercial use in a person's workstation development session, including agents and git hooks within that session. Pipeline Use is free for Public Repositories and Personal Non-Commercial Projects. Other Pipeline Use requires a paid Runner License from [mutation.sh/pricing](https://mutation.sh/pricing) after one 15-day evaluation per organization or independent individual. Hosted and self-hosted workflows are treated alike. Licensing is a legal requirement; the Software performs no license check. See sections 1.14–1.17 and 3.4 of the [licence](../LICENSE-BINARY) for the definitions and evaluation rules. The licence states the rest of its rights and limits. The [privacy notice](privacy.md) says what each version sends over a network.
 
 > [!WARNING]
 > The npm package named `mutation`, without a scope, is someone else's package, not Mutation's. Install `@mutationhq/cli`.

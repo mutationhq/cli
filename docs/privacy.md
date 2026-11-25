@@ -1,10 +1,10 @@
 # Privacy notice: the `mutation` CLI
 
-Version 1.1, effective 2026-11-24. Applies to `mutation` 0.1.0 and later until a new version of this notice replaces it. This is the Privacy Notice that the [Mutation CLI License](../LICENSE-BINARY) (section 7) refers to; capitalized terms (Software, Telemetry, Official Channels) mean what the licence defines.
+Version 1.2, effective 2026-11-25. Applies to `mutation` 0.1.0 and later until a new version of this notice replaces it. This is the Privacy Notice that the [Mutation CLI License](../LICENSE-BINARY) (section 7) refers to; capitalized terms (Software, Telemetry, Official Channels) mean what the licence defines.
 
 ## Who we are
 
-Mutation.sh ("Mutation") is responsible for the processing this notice describes. Contact: support@mutation.sh. When a version of the Software first sends Telemetry, this notice will name Mutation's representatives in the European Union and the United Kingdom where the law requires them.
+[[SELLER LEGAL NAME]], a [[SELLER LEGAL FORM]] trading as Mutation.sh ("Mutation"), established at [[SELLER ADDRESS]], is responsible for the processing this notice describes. Contact: support@mutation.sh. When a version of the Software first sends Telemetry, this notice will name Mutation's representatives in the European Union and the United Kingdom where the law requires them.
 
 ## Your code stays on your machine
 
@@ -22,8 +22,8 @@ A version sends nothing that this table does not list for it. Each later version
 
 No version sends Telemetry yet. Mutation plans to add it, and this section sets the rules it will follow, so that what you read today stays true when it arrives.
 
-- **When it is sent.** In the free Software, Telemetry is always on once a version sends it: it is a condition of the free licence (section 7.4 of the [Mutation CLI License](../LICENSE-BINARY)) and cannot be turned off. If you do not want it sent, do not use the free Software. A paid agreement with Mutation that covers the CLI lets you turn it off (opt-out). The first version that sends Telemetry shows this on its first run and in `mutation --help`.
-- **Controls, with a paid agreement.** Any of these turns Telemetry off: `telemetry: off` in your `config.yml`, `MUT_TELEMETRY=off`, or `DO_NOT_TRACK=1`. In the free Software these settings are accepted and have no effect. Today's versions send nothing and do not know these settings yet: they refuse `MUT_TELEMETRY` and the `telemetry` key as unknown ([configuration](configuration.md)).
+- **When it is sent.** In the free Software, Telemetry is always on once a version sends it: it is a condition of the free licence (section 7.4 of the [Mutation CLI License](../LICENSE-BINARY)) and cannot be turned off. If you do not want it sent, do not use the free Software. A Runner License is a paid agreement that lets you turn it off (opt-out) during its term, for the uses its Order covers; another paid agreement with Mutation that covers the CLI may do the same. The first version that sends Telemetry shows this on its first run and in `mutation --help`.
+- **Controls, with a Runner License or another paid agreement.** Any of these turns Telemetry off: `telemetry: off` in your `config.yml`, `MUT_TELEMETRY=off`, or `DO_NOT_TRACK=1`. In the free Software these settings are accepted and have no effect. Today's versions send nothing and do not know these settings yet: they refuse `MUT_TELEMETRY` and the `telemetry` key as unknown ([configuration](configuration.md)).
 - **What may be sent:** the CLI version; the operating system and its version; the CPU architecture; how it was installed (npm, Homebrew, an archive); the command and subcommand name, never its arguments or flag values; the stable error code from [exit codes](exit-codes.md), never the message; the exit code; durations and sizes rounded into ranges; whether it runs in CI; and, only if the version's row says so, a random installation identifier created on your machine, not derived from its hardware, which you can reset and which is deleted when you turn Telemetry off.
 - **What is never sent:** the contents of your repositories; file, folder or repository names; paths; remote URLs; branch names; commit hashes; queries; settings files; environment variables; user or host names; email addresses; error text or stack traces; or a hash of any of these.
 - **Your IP address** reaches the receiving server as part of the connection. The endpoint discards it on receipt and does not log it, and any provider that runs the endpoint is bound to the same.
@@ -35,13 +35,17 @@ No version sends Telemetry yet. Mutation plans to add it, and this section sets 
 
 If you email support@mutation.sh, Mutation uses your name, address and message to answer you and, for a security report, to fix the issue and credit you if you wish. The mailbox is run by Zoho Mail in Zoho's data centres in the European Union, under Zoho's data processing agreement. The legal basis is Mutation's legitimate interest in supporting users and securing the product (Article 6(1)(f) GDPR) and, for security reports, its legal obligations under Regulation (EU) 2024/2847 (Article 6(1)(c) GDPR). Mutation keeps this correspondence for two years after the matter is closed.
 
+## When you buy a Runner License
+
+For purchases, Mutation processes customer identity, contact details, organization, order, billing and tax information to administer the contract and comply with legal obligations, such as tax and accounting records. The legal bases are the contract (Article 6(1)(b) GDPR) and Mutation's legal obligations (Article 6(1)(c) GDPR). Payments, invoices and the computation of sales tax and VAT are handled by Stripe (Stripe, Inc., and Stripe Payments Europe, Limited for customers in the European Economic Area and the United Kingdom), which processes this data as Mutation's payment processor and, for its own legal and fraud-prevention obligations, as an independent controller under its privacy policy ([[PAYMENT PROVIDER PRIVACY URL]]); that policy states where Stripe transfers the data and the safeguards it uses. Mutation does not receive full payment-card details: Stripe handles them directly. Order records are retained for [[ORDER RECORDS RETENTION]].
+
 ## Where you get the CLI
 
 npm, GitHub and Homebrew process data about your downloads under their own privacy notices; Mutation receives at most download totals from them. Homebrew collects its own usage analytics unless you turn them off (`brew analytics off`). A registry mirror, proxy or cache you use processes data under its operator's terms.
 
 ## United States
 
-With a paid agreement, `DO_NOT_TRACK=1` turns Telemetry off, as described under Usage data; the free Software sends Telemetry regardless of it. Before the version that adds Telemetry is released, this section will state the rights that US state privacy laws give you, where Mutation meets their thresholds.
+With a Runner License or another paid agreement, `DO_NOT_TRACK=1` turns Telemetry off, as described under Usage data; the free Software sends Telemetry regardless of it. Before the version that adds Telemetry is released, this section will state the rights that US state privacy laws give you, where Mutation meets their thresholds.
 
 ## Your rights
 

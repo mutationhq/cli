@@ -1,43 +1,82 @@
 # Mutation CLI
 
-`mutation` is the command line of [Mutation](https://mutation.sh). With it, a person or an agent verifies a mutation (a commit, a change request, or the edits in a worktree) and queries the System State of a repository with standard SQL (SQL/PGQ) or openCypher. It runs on your machine, on a local clone from any git host.
+`mutation` verifies every change to your code, a person's or an agent's, and answers questions about your repository from its code graph. It runs on your machine, on a local clone from any git host, and works for you, your CI and your coding agents alike.
 
-This repository holds the CLI's documentation, its npm packages, its changelog and, from the first release on, its release files. The source of `mutation` is not public.
+- **Verify a change**: `mutation verify` runs the probes on a change and its base, compares their findings and decides pass or fail, with SARIF, Code Quality, Markdown and HTML reports.
+- **Query the code**: callers, callees, references, impact, paths between definitions, metrics, or any question in standard SQL (SQL/PGQ) or openCypher.
+- **Give agents context**: `mutation context` hands an agent the code around a target within a budget of tokens.
 
-> [!IMPORTANT]
-> **Mutation's CLI is in development.** Version 0.1.0 is not released yet, and most commands answer Not Implemented (exit code 5). The install commands below work once 0.1.0 is published.
-
-## Status
-
-Every command, flag and query kind already parses in full and checks its arguments. What is built today:
-
-| Command | State |
-| --- | --- |
-| `mutation config show`, `validate`, `schema`, `init` | Built: the repository's `mutation.yml` and the machine's `config.yml` with `MUT_*` variables |
-| `mutation completions <shell>` | Built: bash, zsh, fish, PowerShell, elvish |
-| `mutation debug index`, `debug shares`, `debug detect` | Built: measurements, unstable across releases |
-| `mutation index`, `query <kind>`, `verify`, `context`, `watch`, `debug data verify` | Not implemented: arguments are checked, then the command exits 5 |
-
-The [command reference](docs/commands.md) gives each command's status.
-
-## Install
+## Quick start
 
 By installing or using `mutation` you accept the [Mutation CLI License](LICENSE-BINARY) ([summary](#license)). The npm package named `mutation` without a scope is not Mutation's: always install `@mutationhq/cli`.
 
-Once 0.1.0 is published, any of these will install it:
+Install it with npm or Homebrew:
 
 ```sh
-# npm: installs the `mutation` command
-npm install --global @mutationhq/cli
-
-# npx: runs it without installing
-npx @mutationhq/cli --help
-
-# Homebrew (macOS and Linux)
-brew install mutationhq/tap/mutation
+npm install --global @mutationhq/cli     # or run it once: npx @mutationhq/cli --help
+brew install mutationhq/tap/mutation     # macOS and Linux
 ```
 
-Archives for each platform will also be attached to each [GitHub Release](https://github.com/mutationhq/cli/releases), with a signed `SHA256SUMS` ([verifying releases](docs/verifying-releases.md)).
+Then try it in any git repository:
+
+```sh
+cd your-repository
+
+mutation verify                                  # your uncommitted changes against HEAD
+mutation verify main..HEAD                       # the change from main to HEAD
+mutation query find run --fuzzy                  # definitions by name
+mutation query callers app::run                  # what calls a definition
+mutation query impact app::run                   # what depends on it
+mutation query sql 'SELECT key FROM code.nodes LIMIT 5'
+mutation context app::run --budget 4000          # the code around it, for an agent
+```
+
+The first command indexes the repository into `.mutation/data.mt`, shared by every worktree of the repository; later commands read only what changed since. `mutation query catalog` lists what the index holds, and `--print-sql` shows the SQL behind any query.
+
+## Use it with coding agents
+
+The [`mutation` skill](skills/mutation/SKILL.md) teaches a coding agent the loop: understand the code with `query` and `context` before an edit, and run `mutation verify` before it says a task is done. It follows the open [Agent Skills](https://agentskills.io) format, so one skill serves every agent:
+
+| Agent | Install |
+| --- | --- |
+| Claude Code | `/plugin install mutation --marketplace mutationhq/cli` |
+| Codex CLI | `codex plugin marketplace add mutationhq/cli`, then `codex plugin add mutation@mutation` |
+| Kiro CLI | `npx skills add mutationhq/cli -a kiro-cli` (add `-g` for every workspace) |
+| Any other agent | `npx skills add mutationhq/cli` |
+
+In Kiro IDE, add it as a power: **Powers**, then **Add Custom Power**, then import `https://github.com/mutationhq/cli`. An agent without skills can still use `mutation` as it is: `mutation --help` and every command's `--help` describe its arguments, and `--format json` gives output to parse.
+
+## Use it in CI/CD
+
+`mutation verify` exits 3 when a change adds blocking findings, so a pipeline fails on it without parsing output. Its reports feed your host's code scanning:
+
+```yaml
+# .github/workflows/mutation.yml
+name: Mutation
+on: pull_request
+permissions:
+  contents: read
+  security-events: write
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: npx --yes @mutationhq/cli verify origin/${{ github.base_ref }}...HEAD --settings origin/${{ github.base_ref }} --output sarif=mutation.sarif
+      - uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: mutation.sarif
+```
+
+On GitLab, `--format codeclimate` gives the Code Quality report. `--settings` reads `mutation.yml` from the target branch, so a change cannot rewrite the settings it is verified against.
+
+> [!NOTE]
+> **CI/CD for a private repository requires a Runner License after the evaluation, unless the repository is part of a Personal Non-Commercial Project.** `mutation` is free for personal and commercial use in a person's workstation development session, including agents and git hooks within that session. Pipeline Use is free for Public Repositories and Personal Non-Commercial Projects. Other Pipeline Use requires a paid Runner License from [mutation.sh/pricing](https://mutation.sh/pricing) after one 15-day evaluation per organization or independent individual. Hosted and self-hosted workflows are treated alike. Licensing is a legal requirement; the Software performs no license check. See sections 1.14–1.17 and 3.4 of the [licence](LICENSE-BINARY) for the definitions and evaluation rules.
+
+## Platforms
 
 | Platform | npm package |
 | --- | --- |
@@ -46,61 +85,31 @@ Archives for each platform will also be attached to each [GitHub Release](https:
 | Linux, ARM64, glibc 2.28 or newer | `@mutationhq/cli-linux-arm64` |
 | Windows, x64 | `@mutationhq/cli-win32-x64` |
 
-Intel Macs, musl-based Linux (Alpine) and Windows on ARM are not supported. See [installation](docs/installation.md) for the details, including the CPU features each build requires.
-
-## Quick start
-
-What works in 0.1.0:
-
-```sh
-mutation --version --format json   # the version and the build's details
-mutation config init               # write mutation.yml with every default
-mutation config validate           # check the repository's mutation.yml
-mutation config show               # the settings a run would apply, each with its origin
-mutation completions zsh > "${fpath[1]}/_mutation"
-```
-
-What the CLI is designed to do, not built yet (each exits 5 today):
-
-```sh
-mutation verify main..HEAD                       # verify the change from main to HEAD
-mutation query callers app::run                  # what calls a definition, at HEAD
-mutation query sql 'SELECT key FROM code.nodes LIMIT 5'
-mutation context app::run --budget 4000          # code around a target, for an agent
-```
+Archives for each platform are attached to each [GitHub Release](https://github.com/mutationhq/cli/releases), with a signed `SHA256SUMS` ([verifying releases](docs/verifying-releases.md)). Intel Macs, musl-based Linux (Alpine) and Windows on ARM are not supported. See [installation](docs/installation.md), including the CPU features each build requires.
 
 ## Commands
 
-| Command | What it does | Status |
-| --- | --- | --- |
-| `index [PATH]` | Index a revision or a history into the repository's data file | Not implemented |
-| `query <kind>` | Answer a question from the index: `sql`, `cypher`, `find`, `definition`, `outline`, `references`, `callers`, `callees`, `impact`, `path`, `diff`, `text`, `metrics`, `catalog` | Not implemented |
-| `verify [REV\|A..B]` | Run the workflow's probes on a change and its base, compare their findings, decide pass, fail or incomplete | Not implemented |
-| `context [TARGET...]` | Give the code around targets within a budget of tokens, for an agent | Not implemented |
-| `watch` | Verify the worktree each time it changes, one JSON line an event | Not implemented |
-| `config show\|validate\|schema\|init` | Show, check, describe or write the settings | Built |
-| `completions SHELL` | Write a shell's completions to stdout | Built |
-| `debug ...` | Measurements, unstable across releases | Partly built |
+| Command | What it does |
+| --- | --- |
+| `verify [REV\|A..B]` | Run the workflow's probes on a change and its base, compare their findings, decide pass, fail or incomplete |
+| `query <kind>` | Answer a question from the index: `sql`, `cypher`, `find`, `definition`, `outline`, `references`, `callers`, `callees`, `impact`, `path`, `diff`, `text`, `metrics`, `catalog` |
+| `context [TARGET...]` | Give the code around targets within a budget of tokens, for an agent |
+| `watch` | Verify the worktree each time it changes, one JSON line an event |
+| `index [PATH]` | Index a revision or a history ahead of the commands that read it |
+| `config show\|validate\|schema\|init` | Show, check, describe or write the settings |
+| `completions SHELL` | Write a shell's completions: bash, zsh, fish, PowerShell, elvish |
 
-Global options: `-C DIR`, `--format`, `--output FMT=FILE`, `--threads N`, `--no-update`, `--config FILE`, `--color auto|always|never`, `--quiet`. Details in [commands](docs/commands.md).
+Every command reads a revision (`REV`), a comparison (`A..B`, or `A...B` from the merge base), the worktree, a patch (`--patch FILE|- --at REV`) or a folder without git. Global options: `-C DIR`, `--format`, `--output FMT=FILE`, `--threads N`, `--no-update`, `--config FILE`, `--color auto|always|never`, `--quiet`. Details in [commands](docs/commands.md).
 
 ## Configuration
 
 | Source | What it sets |
 | --- | --- |
-| `mutation.yml` in the repository | The repository's settings: invariants, ignored paths, how a review speaks on the host. The first present of `.github/`, `.gitlab/`, then the root |
+| `mutation.yml` in the repository | The repository's settings: invariants, ignored paths, how a review speaks on the host. The first present of `.github/`, `.gitlab/`, then the root. `mutation config init` writes one with every default |
 | The user's `config.yml` | The machine's settings: `threads`, `format`, `color`, `data`, `spill` |
 | `MUT_*` variables | The same machine settings: `MUT_THREADS`, `MUT_FORMAT`, `MUT_COLOR`, `MUT_DATA`, `MUT_SPILL`, and `MUT_CONFIG` for a file |
 
-The user's `config.yml` lives at:
-
-| System | Path |
-| --- | --- |
-| Linux | `$XDG_CONFIG_HOME/mutation/config.yml` (`~/.config/mutation/config.yml` without it) |
-| macOS | `~/Library/Application Support/mutation/config.yml` |
-| Windows | `%APPDATA%\mutation\config.yml` |
-
-Precedence, lowest first: defaults, the user's file, `--config FILE` or `MUT_CONFIG`, `MUT_*` variables, flags. An unknown key or variable is refused with exit 2. See [configuration](docs/configuration.md).
+The user's `config.yml` lives at `$XDG_CONFIG_HOME/mutation/config.yml` on Linux (`~/.config/mutation/config.yml` without it), `~/Library/Application Support/mutation/config.yml` on macOS and `%APPDATA%\mutation\config.yml` on Windows. Precedence, lowest first: defaults, the user's file, `--config FILE` or `MUT_CONFIG`, `MUT_*` variables, flags. An unknown key or variable is refused with exit 2. See [configuration](docs/configuration.md).
 
 ## Exit codes
 
@@ -111,7 +120,6 @@ Precedence, lowest first: defaults, the user's file, `--config FILE` or `MUT_CON
 | 2 | Usage: arguments, configuration, or a revision, key or patch that does not resolve |
 | 3 | `verify` decided fail: blocking findings |
 | 4 | Incomplete answer or decision |
-| 5 | Not implemented |
 | 130 | Interrupted |
 
 See [exit codes](docs/exit-codes.md) for the error codes and which exit wins when several apply.
@@ -125,8 +133,11 @@ See [exit codes](docs/exit-codes.md) for the error codes and which exit wins whe
 - [Verifying releases](docs/verifying-releases.md)
 - [Privacy notice](docs/privacy.md)
 - [Legal documents](docs/legal.md)
+- [Model withdrawal form](docs/withdrawal-form.md)
 - [How the npm packages fit together](npm/README.md)
 - [Changelog](CHANGELOG.md)
+
+This repository holds the CLI's documentation, its npm packages, its agent skills and its release files. The source of `mutation` is not public.
 
 ## Reporting issues and security
 
@@ -134,15 +145,15 @@ Bugs and feature requests go to [issues](https://github.com/mutationhq/cli/issue
 
 ## License
 
-- **The `mutation` program** (the Software) is free of charge for any lawful use, personal or commercial, under the [Mutation CLI License](LICENSE-BINARY), which you accept by installing or using it. Only Mutation publishes it, through the Official Channels: the npm packages under `@mutationhq`, the `mutationhq/homebrew-tap` formula and this repository's GitHub Releases. A byte-identical copy from a registry mirror, a proxy, a CDN or your organization's cache is covered too; redistributing or repackaging it is not allowed. It is provided free of charge and, to the extent the law allows, without warranty (see the licence for the rights that the law keeps for you). Check each download's checksum and signature before you use it ([verifying releases](docs/verifying-releases.md)). Third-party components inside it keep their own licences, listed in `THIRD-PARTY-NOTICES` with each release.
-- **This repository's files**, except `LICENSE-BINARY` (the docs, the npm launcher and manifests, the READMEs, the templates), are under the [MIT License](LICENSE). So is the `@mutationhq/cli` npm package, which holds only the launcher; the binary comes in the platform packages, under the Mutation CLI License.
+- **The `mutation` program** (the Software) is under the [Mutation CLI License](LICENSE-BINARY), which you accept by installing or using it. `mutation` is free for personal and commercial use in a person's workstation development session, including agents and git hooks within that session. Pipeline Use is free for Public Repositories and Personal Non-Commercial Projects. Other Pipeline Use requires a paid Runner License from [mutation.sh/pricing](https://mutation.sh/pricing) after one 15-day evaluation per organization or independent individual. Hosted and self-hosted workflows are treated alike. Licensing is a legal requirement; the Software performs no license check. See sections 1.14–1.17 and 3.4 of the [licence](LICENSE-BINARY) for the definitions and evaluation rules. A Runner License renews monthly or annually until you cancel it online, and consumers in the EU, the EEA and the UK may withdraw within 14 days ([model withdrawal form](docs/withdrawal-form.md)). Only Mutation publishes it, through the Official Channels: the npm packages under `@mutationhq`, the `mutationhq/homebrew-tap` formula and this repository's GitHub Releases. A byte-identical copy from a registry mirror, a proxy, a CDN or your organization's cache is covered too; redistributing or repackaging it is not allowed. To the extent the law allows, it comes without warranty (see the licence for the rights that the law keeps for you). Check each download's checksum and signature before you use it ([verifying releases](docs/verifying-releases.md)). Third-party components inside it keep their own licences, listed in `THIRD-PARTY-NOTICES` with each release.
+- **This repository's Open Files**, including the docs, the agent skills, the npm launcher and manifests, the READMEs and the templates, are under the [MIT License](LICENSE). The Software, `LICENSE-BINARY` and `THIRD-PARTY-NOTICES` are outside that grant, and `CODE_OF_CONDUCT.md` is under CC BY 4.0. The `@mutationhq/cli` npm package holds the MIT-licensed launcher; the binary comes in the platform packages, under the Mutation CLI License.
 - **Contributions:** pull requests are MIT with a DCO sign-off, and issues are Feedback under the licence ([contributing](CONTRIBUTING.md)).
 
 [Legal documents](docs/legal.md) lists each of them, its version and whom it binds.
 
 ## Privacy
 
-What each version of `mutation` sends over a network, and the Telemetry Mutation plans to add with its controls, are in the [privacy notice](docs/privacy.md).
+What `mutation` sends over a network, including its Telemetry and the controls a Runner License gives, is in the [privacy notice](docs/privacy.md).
 
 ## Export
 

@@ -1,7 +1,7 @@
 MUTATION CLI LICENSE
 
-Version 1.2
-Effective date: 2026-11-24
+Version 1.3
+Effective date: 2026-11-25
 
 Copyright (c) 2026 Mutation.sh. All rights reserved.
 
@@ -12,8 +12,19 @@ Summary (not part of this license)
 This summary helps You read the license below. It is not part of the
 license, and where the two differ, the license controls.
 
-- The `mutation` program is free of charge for any lawful use, personal or
-  commercial, including in CI and on an organization's machines.
+- The `mutation` program is free for personal and commercial use in a
+  person's workstation development session, including agents and git
+  hooks within that session. Pipeline Use is free for Public Repositories
+  and Personal Non-Commercial Projects. Other Pipeline Use requires a paid
+  Runner License from https://mutation.sh/pricing after one 15-day
+  evaluation per organization or independent individual. Hosted and
+  self-hosted workflows are treated alike. Licensing is a legal
+  requirement; the Software performs no license check. See Sections 1.14
+  to 1.17 and 3.4 for the definitions and evaluation rules.
+- A Runner License renews monthly or annually, as its Order states, until
+  You cancel it online; cancellation takes effect at the end of the paid
+  period (Section 3.8). Consumers in the EU, the EEA and the UK may
+  withdraw from a purchase within 14 days (Section 11.5).
 - Only Mutation publishes it: the npm packages under @mutationhq, the
   formula in mutationhq/homebrew-tap and the GitHub Releases of
   mutationhq/cli. Identical copies served by a registry mirror, a proxy, a
@@ -24,13 +35,16 @@ license, and where the two differ, the license controls.
   the program itself.
 - Your code and Your Output stay Yours. Anything a version sends over a
   network is listed, version by version, in the Privacy Notice
-  (docs/privacy.md), and Telemetry can always be turned off.
+  (docs/privacy.md). Telemetry controls and mandatory privacy rights are
+  described in Section 7.4 and the Privacy Notice.
 - Check the checksums and signatures of a release before You run it.
   Mutation is not liable to business users for a copy it did not build and
   release, or one someone else altered, as Section 8 sets out.
 - For business users the program comes as is, and Mutation's liability is
-  excluded or capped at USD 50. Consumers keep the rights their own law
-  gives them, and no one loses a right the law says cannot be taken away.
+  excluded or capped at the greater of USD 50 and Runner License fees paid
+  in the twelve months before the event giving rise to the first claim.
+  Consumers keep the rights their own law gives them, and no one loses a
+  right the law says cannot be taken away.
 - If You do not accept this license, do not install or use the program.
 
 
@@ -48,9 +62,12 @@ under their own terms.
 
 1. DEFINITIONS
 
-1.1  "Mutation", "we" and "us" mean Mutation.sh, reachable at
-     support@mutation.sh, doing business as Mutation, and its successors
-     and assigns.
+1.1  "Mutation", "we" and "us" mean [[SELLER LEGAL NAME]], a
+     [[SELLER LEGAL FORM]], trading as Mutation.sh and Mutation,
+     established at [[SELLER ADDRESS]], registered under
+     [[SELLER REGISTRATION]], VAT number [[SELLER VAT NUMBER]], email
+     support@mutation.sh, telephone [[SELLER PHONE]], and its successors
+     and permitted assigns.
 
 1.2  "Software" means the `mutation` command-line program in executable
      form, in every version, as built and released by Mutation through an
@@ -124,6 +141,46 @@ under their own terms.
 1.13 "Mutation Parties" means Mutation and its affiliates, officers,
      directors, employees, contractors, agents, licensors and suppliers.
 
+1.14 "Pipeline Use" means running the Software as part of a hosted or
+     self-hosted automated workflow that builds, tests, indexes, analyzes,
+     queries, verifies, reviews or deploys code, or supplies code context,
+     independently of a person's development session. It includes
+     scheduled and event-driven jobs, CI/CD runners, and autonomous tasks
+     executed in provider-hosted agent sandboxes, even when a person
+     submits the task or starts the workflow manually.
+     Pipeline Use excludes use by a person, or by an agent or tool acting
+     within that person's development session, on a local workstation or
+     a remote workstation or VM used directly by that person for
+     development, including git hooks and development watchers within that
+     session. A continuously powered machine or persistent login does not
+     by itself establish this exclusion. A runner executing an independent
+     workflow remains Pipeline Use even when installed on a workstation.
+
+1.15 "Repository" includes a repository, fork, mirror, worktree, source
+     archive or equivalent source project. A "Public Repository" is one
+     for which all source revisions and changes analyzed by the Software
+     are lawfully available to anyone without authentication or individual
+     permission when the Software runs. A "Private Repository" is any
+     other Repository. A local clone, authenticated checkout or private
+     cache of otherwise public source retains that source's public status.
+     A public upstream or mirror does not make unpublished changes public.
+
+1.16 "Personal Non-Commercial Project" means a project pursued by an
+     individual on their own account, outside their employment, business
+     or professional activities, not for or on behalf of an organization
+     or client, and without a commercial purpose or compensation.
+     Publishing under an open source license does not itself determine
+     commercial status. Unconditional voluntary donations that purchase no
+     goods, services, access or other benefit do not alone make a project
+     commercial; paid sponsorship, advertising, paid access and
+     compensation for work do.
+
+1.17 "Runner License" means a paid license for Pipeline Use that Mutation
+     sells at https://mutation.sh/pricing or under a written order (each
+     an "Order"), for the scope, quantity and term that the Order states.
+     "Order Terms" means the terms of an accepted Order, as Section 3.6
+     describes.
+
 
 2. ACCEPTANCE
 
@@ -141,8 +198,11 @@ under their own terms.
      it.
 
 2.4  If You do not accept this license, do not install, copy or use the
-     Software. If You are a Business User and obtained or used the Software
-     before You accepted this license, it applies to that use too.
+     Software. Acceptance does not change the terms governing earlier
+     versions or impose Runner License fees for use before acceptance.
+     Unauthorized use does not itself create an Order or an agreed
+     subscription charge; Mutation retains its remedies under applicable
+     law.
 
 2.5  If You accept this license on behalf of an organization, You confirm
      that You have the authority to bind that organization to it.
@@ -151,15 +211,16 @@ under their own terms.
      whether or not this license binds You.
 
 
-3. LICENSE GRANT
+3. LICENSE GRANT AND RUNNER LICENSES
 
 3.1  Subject to Your compliance with this license, Mutation grants You a
-     free of charge, non-exclusive, worldwide, non-transferable and
-     non-sublicensable license to install and use the Software for any
-     lawful purpose, including personal use, commercial use, continuous
-     integration, and use on an organization's machines and in its
-     pipelines by its employees and contractors on its behalf. No fee is
-     due. This license ends only as Sections 8.6, 14.5 and 15 provide.
+     non-exclusive, worldwide, non-transferable and non-sublicensable
+     license to install and use the Software for any lawful purpose,
+     including personal use, commercial use, and use on an organization's
+     machines by its employees and contractors on its behalf, with
+     Pipeline Use as Section 3.4 provides. No fee is due except
+     for a Runner License under Section 3.4. This license ends only as
+     Sections 8.6, 14.5 and 15 provide.
 
 3.2  You may obtain the Software from an Official Channel, or install and
      use any copy of it that is identical to one Mutation released through
@@ -175,6 +236,73 @@ under their own terms.
 3.3  You may make the copies of the Software that this use needs, including
      backup copies.
 
+3.4  Pipeline Use. Pipeline Use requires a valid Runner License that
+     covers it unless every Repository analyzed in that use is either a
+     Public Repository or part of a Personal Non-Commercial Project, or the
+     evaluation exception below applies. The visibility, ownership and
+     location of the pipeline do not determine the Repository's status. A
+     company's private pipeline analyzing only public source is therefore
+     free. Dependencies not analyzed by the Software do not affect this
+     classification.
+     Evaluation permits otherwise chargeable Pipeline Use for 15
+     consecutive periods of 24 hours beginning with the first such use
+     under these terms. Exempt use does not start the period. The period
+     is available once per organization, collectively with entities
+     controlling, controlled by or under common control with it, and once
+     per individual acting on their own account. Control means the power
+     to direct management. Accounts, users, repositories, runners,
+     reinstalls and reorganizations do not restart the period. Evaluation
+     ends without a charge or automatic purchase.
+     Pipeline Use under a Runner License is governed by this license and by
+     its Order Terms; where they conflict, the Order Terms prevail for that
+     Runner License, subject to Sections 10.1 and 11. A Runner License may
+     be transferred only as its Order Terms allow.
+
+3.5  The Software does not check whether Pipeline Use is licensed. That it
+     runs without a Runner License does not grant one.
+
+3.6  Orders. Before purchase, each Order identifies the seller and
+     customer; the covered organization and affiliates; the licensed scope
+     and quantity and how quantity is counted; the covered Software
+     versions; commencement and expiry; price, currency and payment
+     schedule; applicable taxes; renewal, cancellation and refund terms;
+     support and Telemetry entitlements; and all incorporated terms. The
+     accepted Order and incorporated terms are supplied by email or another
+     durable medium. No later website change alters an accepted Order
+     during its term without the customer's express agreement.
+
+3.7  Fees and taxes. Fees are payable in advance for each term, by the
+     payment method given at purchase. The Order shows the total payable,
+     currency and applicable sales tax or VAT before purchase. Mutation
+     collects the sales tax or VAT that the law requires it to collect on
+     the Order. Consumer prices include applicable taxes. Business prices
+     may exclude taxes only where clearly disclosed and lawful. Mutation
+     remains responsible for taxes on its income.
+
+3.8  Renewal and cancellation. A Runner License renews automatically for
+     successive terms of the same length, monthly or annually as its Order
+     states, until cancelled. Mutation charges for a renewal only where
+     the customer expressly agreed, at checkout, to its amount, its
+     frequency and how to cancel it. Before each annual renewal, and
+     before any renewal at a changed price, Mutation sends a reminder to
+     the Order's customer email address at least 15 and at most 45 days
+     before the renewal date, stating that date, the amount to be charged
+     and how to cancel. A changed price applies only from a renewal that
+     such a reminder announced. For Consumers in California, Mutation also
+     sends an annual reminder identifying the Runner License, the amount
+     and frequency of charges, and how to cancel, including for monthly
+     terms, and gives a clear notice of any fee change, with cancellation
+     instructions, at least 7 and at most 30 days before the change takes
+     effect. One notice may meet both requirements if it meets both
+     timing windows and includes all required information. You may
+     cancel the renewal online at any time, on the website where You
+     bought the Runner License, by a process no harder than the purchase.
+     Cancellation takes effect at the end of the paid period, and the
+     Runner License stays in force until then; the period already paid is
+     not refunded except as Sections 11.5 and 15.4 or mandatory law
+     provide. Evaluation under Section 3.4 does not renew or convert into
+     a Runner License: one exists only once an Order is placed.
+
 
 4. RESTRICTIONS
 
@@ -184,11 +312,15 @@ despite a contractual restriction, You may not:
 (a) sell, rent, lease, lend or sublicense the Software, host it for
     others, or distribute it or otherwise make it available to any third
     party, in any form or under any name, except that:
-    (i)  Your organization's employees and contractors may use copies held
-         under Section 3.2 for its internal purposes; and
-    (ii) automatic copies of packages published through an Official
-         Channel, made by registries, mirrors, proxies, content delivery
-         networks and caches, are not a breach of this license;
+    (i)   Your organization's employees and contractors may use copies
+          held under Section 3.2 for its internal purposes;
+    (ii)  automatic copies of packages published through an Official
+          Channel, made by registries, mirrors, proxies, content delivery
+          networks and caches, are not a breach of this license; and
+    (iii) Your infrastructure providers may install and run copies
+          solely on Your behalf for uses permitted to You under Section
+          3; this does not authorize offering the Software itself as a
+          separately licensed service;
     nothing in this license permits a repackaged or altered binary, an
     installer of Your own, a package under another name or scope, or a
     public archive or image that contains the Software, other than the
@@ -205,9 +337,11 @@ despite a contractual restriction, You may not:
 (d) remove, alter or obscure any notice of copyright, license or
     attribution in the Software;
 (e) use Mutation's names, logos or trademarks, except as Section 21
-    allows; or
+    allows;
 (f) use the Software in violation of any applicable law, including the
-    laws described in Section 14.
+    laws described in Section 14; or
+(g) make Pipeline Use other than as Section 3.4 allows, or exceed the
+    scope or quantity of a Runner License.
 
 
 5. OWNERSHIP
@@ -260,12 +394,15 @@ license.
      use the free Software. To the extent the law applicable to You requires
      Your consent to Telemetry, You give it by using the free Software after
      its Privacy Notice has been made available to You, and You withdraw it
-     by no longer using the free Software. A paid agreement with Mutation
-     that covers the Software may let You turn Telemetry off, as that
-     agreement states. Telemetry never includes the contents of Your
-     repositories, file or folder names or paths, repository names, remote
-     URLs, branch names, commit hashes, Your Output, the arguments You pass,
-     the text of error messages, or a hash of any of these.
+     by no longer using the free Software. A Runner License is a paid
+     agreement that lets You turn Telemetry off: during its term, You may
+     disable Telemetry for the uses its Order covers, using the controls
+     the Privacy Notice documents. Another paid agreement with Mutation
+     that covers the Software may do the same, as that agreement states.
+     Telemetry never includes the contents of Your repositories, file or
+     folder names or paths, repository names, remote URLs, branch names,
+     commit hashes, Your Output, the arguments You pass, the text of error
+     messages, or a hash of any of these.
 
 7.5  Mutation processes personal data in connection with the Software as
      the Privacy Notice describes.
@@ -351,12 +488,11 @@ license.
      YOUR USE, AND FOR ANY DECISION YOU MAKE, OR ACTION YOU TAKE, ON THE
      BASIS OF THEM.
 
-9.2  IF YOU ARE A CONSUMER, THE SOFTWARE IS PROVIDED FREE OF CHARGE AND "AS
-     IS", AND MUTATION GIVES NO PROMISE ABOUT IT BEYOND WHAT THIS LICENSE
-     STATES AND WHAT THE LAW APPLICABLE TO YOU REQUIRES. TO THE EXTENT THAT
-     LAW ALLOWS, MUTATION EXCLUDES EVERY IMPLIED WARRANTY, INCLUDING ANY
-     IMPLIED WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR
-     PURPOSE. YOUR STATUTORY RIGHTS ARE NOT AFFECTED.
+9.2  IF YOU ARE A CONSUMER, ANY FEES ARE ONLY THOSE EXPRESSLY AGREED IN
+     YOUR ORDER. THE SOFTWARE IS PROVIDED "AS IS" ONLY TO THE EXTENT
+     APPLICABLE LAW ALLOWS. NOTHING IN THIS LICENSE LIMITS YOUR MANDATORY
+     RIGHTS CONCERNING QUALITY, FITNESS, DESCRIPTION, UPDATES, REPAIR,
+     REPLACEMENT, PRICE REDUCTION, REFUND OR OTHER REMEDIES.
 
 9.3  Output is produced by automated analysis and may be incomplete or
      wrong. Check it before You rely on it for a decision that matters.
@@ -381,7 +517,7 @@ license.
          Consumer Protection Act 1987; or
      (e) for anything else that the law applicable to You does not allow
          to be excluded or limited by contract.
-     Sections 8, 9, 10.2 to 10.5 and 12 are subject to this Section 10.1.
+     Sections 8, 9, 10.2 to 10.6 and 12 are subject to this Section 10.1.
 
 10.2 BUSINESS USERS. IF YOU ARE A BUSINESS USER, THEN, TO THE MAXIMUM
      EXTENT PERMITTED BY APPLICABLE LAW:
@@ -399,9 +535,11 @@ license.
      (C) THE TOTAL AGGREGATE LIABILITY OF THE MUTATION PARTIES FOR ALL
          CLAIMS ARISING FROM OR RELATING TO THIS LICENSE, THE SOFTWARE, ANY
          UNAUTHENTIC COPY, ANY OUTPUT, ANY OFFICIAL CHANNEL OR ANY
-         COMPROMISE EVENT WILL NOT EXCEED FIFTY UNITED STATES DOLLARS
-         (USD 50) OR THE EQUIVALENT IN THE CURRENCY OF THE COUNTRY WHERE
-         YOU RESIDE.
+         COMPROMISE EVENT WILL NOT EXCEED THE GREATER OF (I) FIFTY UNITED
+         STATES DOLLARS (USD 50) OR THE EQUIVALENT IN THE CURRENCY OF THE
+         COUNTRY WHERE YOU RESIDE AND (II) THE FEES YOU PAID MUTATION FOR
+         RUNNER LICENSES IN THE TWELVE MONTHS BEFORE THE EVENT THAT GAVE
+         RISE TO THE FIRST CLAIM.
 
 10.3 Consumers. If You are a Consumer, then, subject to Section 10.1,
      Mutation is not liable for loss caused by slight negligence, except
@@ -417,11 +555,19 @@ license.
      FAILS OF ITS ESSENTIAL PURPOSE. THEY ARE INDEPENDENT OF ANY REMEDY THIS
      LICENSE PROVIDES.
 
-10.5 The Software is provided free of charge, and Mutation sets the limits
-     in Sections 8, 9 and 10 for that reason: they are an essential basis
-     of the bargain between You and Mutation. If You are a Business User,
-     You are responsible for the decisions You take on the basis of the
-     Software and its Output, and for keeping backups of Your data.
+10.5 Mutation supplies the free permissions in Section 3 without charge
+     and prices Runner Licenses taking account of the risk allocation in
+     Sections 8 to 10, subject always to Sections 10.1 and 11. If You are a
+     Business User, You are responsible for the decisions You take on the
+     basis of the Software and its Output, and for keeping backups of Your
+     data.
+
+10.6 Paid Runner Licenses. For paid Runner Licenses, Sections 8.3 and
+     10.2(A) and (B) do not exclude liability for breach of Mutation's
+     express paid obligations or failure to exercise reasonable care and
+     skill in performing them. Such liability remains subject to Sections
+     10.1, 10.2(C) and 11. Refunds expressly promised or required by law,
+     and mandatory price reductions, are not reduced by the damages cap.
 
 
 11. MANDATORY LAW AND CONSUMER RIGHTS
@@ -445,6 +591,23 @@ license.
      Regulation (EU) 2024/2847 (the Cyber Resilience Act) or any other law
      on the security of products.
 
+11.5 Right of withdrawal. If You are a Consumer in the European Union, the
+     European Economic Area or the United Kingdom, You may cancel a Runner
+     License purchase without giving a reason until 14 days after the
+     contract is concluded, by emailing support@mutation.sh, by using the
+     withdrawal function on the website where You bought it, or by using
+     the model withdrawal form in docs/withdrawal-form.md of the
+     mutationhq/cli repository. You may also withdraw by any other
+     unequivocal statement sent to Mutation. Despite Section 23,
+     withdrawal is timely if You send the statement before the withdrawal
+     period expires. No particular form or email subject is required.
+     Mutation confirms each cancellation by email and refunds all payments
+     within 14 days after receiving it, using the original payment method,
+     without a fee. Paid supply begins after that period unless You
+     expressly request earlier supply through the applicable lawful
+     consent process. Any contractual refund right
+     stated here remains available despite early supply.
+
 
 12. INDEMNITY (BUSINESS USERS)
 
@@ -467,9 +630,9 @@ not apply to You.
 
 13. SECURITY UPDATES, SUPPORT AND CHANGES
 
-13.1 The Software is provided free of charge, and Mutation promises no
-     support period, support, maintenance, security updates, new features
-     or service level for it, except what applicable law requires
+13.1 Except as Section 13.2 provides, Mutation promises no support period,
+     support, maintenance, security updates, new features or service level
+     for the Software, except what applicable law requires
      (including, once its obligations apply, Regulation (EU) 2024/2847 on
      vulnerability handling and security updates). Any update Mutation
      provides, whether the law requires it or not, is provided as a new
@@ -479,9 +642,13 @@ not apply to You.
      Section 8.5 governs notices of a Compromise Event.
 
 13.2 If You have a paid agreement with Mutation that covers the Software,
-     the support, maintenance and updates it describes are provided for the
-     paid term of that agreement and as it states, and that agreement
-     prevails over this Section 13 for that term.
+     a Runner License among them, the support, maintenance and updates it
+     describes are provided for the paid term of that agreement and as it
+     states, and that agreement prevails over this Section 13 for that
+     term. A Runner License includes support, maintenance, service levels
+     and update commitments only where its Order expressly provides them.
+     Mandatory security-update and consumer-conformity obligations remain
+     unaffected.
 
 13.3 Mutation may change the Software, stop developing it, stop distributing
      any version of it (which ends Your license to that version only as
@@ -537,6 +704,16 @@ not apply to You.
      provision that by its nature should survive, survive the end of this
      license.
 
+15.4 A Runner License expires at the end of its agreed term unless
+     renewed. Expiry alone ends only its paid permissions and does not
+     terminate free permissions or require deletion. Accrued payment
+     obligations, refund obligations and Order provisions necessary to
+     enforce accrued rights survive. If Mutation ends paid permission
+     without Your uncured material breach, or cannot provide the purchased
+     permission for the remaining prepaid term, it refunds the fees
+     attributable to that unavailable period, without limiting mandatory
+     remedies.
+
 
 16. LATER VERSIONS OF THESE TERMS
 
@@ -545,6 +722,12 @@ publishes each version of these terms, with its effective date, in the
 mutationhq/cli repository. Each version of the Software remains under the
 terms it shipped with. A later version of these terms applies to You only
 once You accept it under Section 2.
+
+New terms do not reduce rights purchased for an existing Runner License
+term without Your express agreement. If Section 8.6 requires replacement
+of a covered version, Mutation provides a replacement usable within the
+remaining purchased scope and term without an additional license fee, or
+refunds the unavailable portion.
 
 
 17. GOVERNING LAW AND COURTS
@@ -647,7 +830,9 @@ publishing them in the mutationhq/cli repository (including as a security
 advisory or release note), through an Official Channel, or by email if You
 have given Mutation an email address. You give notices to Mutation at
 support@mutation.sh, with "Legal notice" in the subject. A notice to
-Mutation is effective when received.
+Mutation is effective when received. Notices concerning a paid Order's
+breach, termination, renewal or price change are sent to its designated
+customer email address, subject to mandatory notice requirements.
 
 
 24. GENERAL
@@ -659,25 +844,30 @@ Mutation is effective when received.
 24.2  No waiver. A failure or delay by Mutation in enforcing any provision
       is not a waiver of it or of any other provision.
 
-24.3  Entire agreement. This license, together with the THIRD-PARTY-NOTICES
-      file for the components it names, is the entire agreement between You
-      and Mutation about the Software and supersedes any prior or
-      contemporaneous understanding about it. If You are a Business User,
-      then, subject to Section 10.1, You have not relied on any statement,
-      promise or representation about the Software, its security, its
-      behavior or its distribution, including any made in Mutation's
-      documentation, README files, security policy, website or
-      communications, except as this license expressly states, including
-      where it refers to the Privacy Notice or to SECURITY.md, and the
-      documentation describes the Software and does not otherwise form part
-      of this license or create any warranty or obligation toward You.
+24.3  Entire agreement. This license, applicable Order Terms, any
+      expressly incorporated paid agreement and the THIRD-PARTY-NOTICES for
+      their components constitute the entire agreement about the Software,
+      and supersede any prior or contemporaneous understanding about it.
+      Order Terms prevail for their Runner License, subject to Sections
+      10.1 and 11. If You are a Business User, then, subject to Section
+      10.1, You have not relied on any statement, promise or representation
+      about the Software, its security, its behavior or its distribution,
+      including any made in Mutation's documentation, README files,
+      security policy, website or communications, except as this license
+      expressly states, including where it refers to the Privacy Notice or
+      to SECURITY.md, and the documentation describes the Software and does
+      not otherwise form part of this license or create any warranty or
+      obligation toward You. This non-reliance does not exclude
+      commitments expressly included in Order Terms or in an incorporated
+      paid agreement.
 
 24.4  Assignment. Mutation may assign or transfer this license, in whole or
       in part, without Your consent, including in connection with a
       merger, acquisition or sale of assets. If You are a Consumer, an
       assignment by Mutation will not reduce Your rights under this
       license. You may not assign or transfer this license or any right
-      under it; any attempt to do so is void.
+      under it; any attempt to do so is void. You may transfer a Runner
+      License where its Order Terms expressly permit.
 
 24.5  No third-party beneficiaries. This license benefits only You and
       Mutation, except that the Mutation Parties may enforce Sections 8 to

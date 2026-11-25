@@ -1,0 +1,19 @@
+{
+  "name": "mutation",
+  "owner": {
+    "name": "MutationHQ",
+    "email": "support@mutation.sh"
+  },
+  "description": "The Mutation CLI's skill for Claude Code: verify changes and query a repository's code graph.",
+  "plugins": [
+    {
+      "name": "mutation",
+      "source": "./",
+      "description": "Verify code changes and query a repository's code graph (callers, impact, SQL, openCypher) with the Mutation CLI.",
+      "homepage": "https://mutation.sh",
+      "license": "MIT",
+      "strict": false,
+      "skills": ["./skills/mutation"]
+    }
+  ]
+}
