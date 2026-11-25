@@ -2,6 +2,8 @@
 
 Every command parses its arguments in full and refuses an invalid combination with exit 2, before it does any work.
 
+`mutation` is also installed as `mut`, the same program by a shorter name: `mut verify` is `mutation verify`, and its help and errors name `mut` (npm's commands on Windows always say `mutation`).
+
 Data goes to stdout; errors, progress and completeness go to stderr. Human text is the default, and a machine format is chosen with `--format`, never by whether stdout is a terminal.
 
 ## Global options
@@ -101,7 +103,28 @@ Give the code around targets for an agent, within a budget of tokens (8,000 by d
 mutation watch [--workflow incremental|comprehensive] [--probes IDS]
 ```
 
-Verify the worktree each time it changes, one JSON line an event, each with its input's identity. Format: `jsonl`. Exits: 0 1 2 130.
+Verifies the worktree each time it changes, as `mutation verify` with no argument does, and writes one JSON line an event, until you stop it. Format: `jsonl`.
+
+**What starts a run.** A change to a file that `verify` reads (tracked, or untracked and not ignored), and a change of `HEAD` or of git's index: a commit, a checkout, `git add`. Changes to ignored files, `.mutation/` and the rest of `.git/` start nothing.
+
+**Debounce.** A run starts once no change has come for 250 ms, so saving ten files is one run. One run at a time: changes made during a run start one more run after it ends. While git holds its index lock (a commit, a checkout or a rebase step under way), no run starts.
+
+**Branch switches and worktrees.** Each run compares the worktree with `HEAD` as it is when the run starts, so after `git switch` the next run is against the new branch. Every event carries its input's identity (the commit of `HEAD` and the digest of the worktree's files), so you can tell which state a result belongs to. One `watch` serves the worktree it runs in; run one in each worktree you want watched. They share the repository's data file.
+
+**Events.** Each line is the same result as `mutation verify --format json`, on one line, with `event` (`result` or `error`) and `seq`, the run's number from 1 (shortened here):
+
+```text
+{"format":{"name":"mutation-watch","version":1},"event":"result","seq":3,"input":{"head":"9f3b8ca6c8","worktree":"sha256:4be1…"},"completeness":"complete","decision":"fail","payload":{"findings":[…]},"error":null}
+```
+
+A `fail` or `incomplete` decision is an event, not an exit: `watch` keeps running. When you stop it with Ctrl-C it writes the trailer `{"end":true,...}`, so a reader knows the stream ended whole.
+
+**Exit codes.** 130 when interrupted (Ctrl-C), 0 when the reader of its output closes it (`| head`), 1 when it cannot watch the files, 2 for a usage error, and 5 until it is built.
+
+```sh
+# Print each decision as it happens
+mutation watch | jq -r --unbuffered 'select(.event == "result") | "\(.seq) \(.decision)"'
+```
 
 ## `config`
 
@@ -113,6 +136,37 @@ Verify the worktree each time it changes, one JSON line an event, each with its 
 | `config init [--dry-run]` | Write `mutation.yml` with every default; never replaces an existing file | 0 1 |
 
 Formats: `text`, `json`. See [configuration](configuration.md).
+
+## `install`
+
+```
+mutation install hooks [--hook pre-push|pre-commit] [--remove] [--dry-run] [--force]
+mutation install agent [--agent auto|claude|codex|kiro|agents-md]... [--remove] [--dry-run] [--force]
+```
+
+Set `mutation` up where it runs. Every file or block it writes is marked as Mutation's: running it again changes nothing (`unchanged`), a newer version replaces its own files, and `--remove` deletes only what is marked. `--dry-run` prints the plan, grouped into files to commit and files local to your clone, and the command that applies it.
+
+**`install hooks`** writes a git hook that runs `mutation verify` and exits with its code, so a fail (3) or an incomplete decision (4) stops the push or the commit; `git push --no-verify` skips it once.
+
+- `pre-push` (the default) verifies each branch you push against what the remote holds, or a new branch from its merge base with `origin/HEAD`. Deleting a branch is not verified.
+- `pre-commit` verifies the staged changes: `git diff --cached --binary | mutation verify --patch - --at HEAD`.
+- The hook goes where git runs hooks (`core.hooksPath`, else `.git/hooks`), or into `.husky/` when the repository has one. With lefthook or the pre-commit framework, it prints the entry to add to their file instead. A hooks folder outside the repository is refused (exit 2), since other repositories may run it.
+- If `mutation` is not on `PATH` (nor `npx @mutationhq/cli` installed), the hook says so and lets git go on.
+
+**`install agent`** teaches coding agents the loop:
+
+- the [`mutation` skill](../skills/mutation/SKILL.md) of this `mutation`'s version in `.claude/skills/mutation` (Claude Code), `.agents/skills/mutation` (Codex and other agents) or `.kiro/skills/mutation` (Kiro);
+- three lines in a marked block of `AGENTS.md`, created if missing, and for Claude Code an `@AGENTS.md` import in `CLAUDE.md`.
+
+`--agent auto` (the default) picks the agents whose folder is in the repository or your home folder (`.claude`, `.codex`, `.kiro`), a `CLAUDE.md`, or the agent session it runs in; with none found, `AGENTS.md` and `.agents/skills`. It never changes an agent's settings or permissions, and adds no MCP server.
+
+A file of the same name that Mutation did not write is `refused` unless `--force`; the other steps still run, and the command exits 2 with the code `conflict`. Formats: `text`, `json`. Exits: 0 1 2.
+
+```sh
+mutation install agent --dry-run     # what it would write, for which agents
+mutation install agent
+mutation install hooks                # verify each push
+```
 
 ## `completions`
 

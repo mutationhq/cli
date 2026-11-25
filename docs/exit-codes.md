@@ -6,7 +6,7 @@ Every command exits with one of these codes. Scripts and CI can tell a failing v
 | --- | --- | --- |
 | 0 | Done; `verify` decided `pass` | |
 | 1 | Failed: I/O, an output not written, a corrupt or incompatible data file | `io`, `output`, `corrupt`, `incompatible` |
-| 2 | Usage: arguments, configuration, or a revision, key or patch that does not resolve | `usage`, `config`, `revision_unknown`, `key_unknown`, `key_ambiguous`, `patch_rejected` |
+| 2 | Usage: arguments, configuration, or a revision, key or patch that does not resolve; a step of `install` refused because a file of that name is not Mutation's | `usage`, `config`, `revision_unknown`, `key_unknown`, `key_ambiguous`, `patch_rejected`, `conflict` |
 | 3 | `verify` decided `fail` | `findings` |
 | 4 | Incomplete: an answer under `--exact`, `--no-index` past what is stored, `context` past its budget, `verify` decided `incomplete` | `inexact`, `not_indexed`, `over_budget`, `incomplete` |
 | 5 | A feature this build does not have | `not_implemented` |

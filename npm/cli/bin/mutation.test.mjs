@@ -69,6 +69,8 @@ const world = (text) => {
   const launcher = join(modules, "@mutationhq", "cli", "bin", "mutation.mjs");
   mkdirSync(dirname(launcher), { recursive: true });
   writeFileSync(launcher, text);
+  // npm's second command: a link named `mut` to the launcher, here a copy beside it under that name.
+  writeFileSync(join(dirname(launcher), "mut.mjs"), text);
   writeFileSync(join(dirname(launcher), "layout.mjs"), sources.layout);
   const bin = join(modules, "@mutationhq", `cli-${process.platform}-${process.arch}`, "bin");
   mkdirSync(bin, { recursive: true });
@@ -106,7 +108,7 @@ if (basename(process.execPath).replace(/\\.exe$/i, "") === "mutation") {
     log("gate-end " + process.pid);
     process.stdout.write(answer);
   } else {
-    log("run");
+    log("run " + process.argv0);
   }
   process.exit(0);
 }
@@ -121,9 +123,9 @@ if (basename(process.execPath).replace(/\\.exe$/i, "") === "mutation") {
   mkdirSync(dirname(pending), { recursive: true });
   const log = join(root, "log");
   writeFileSync(log, "");
-  const run = (extra) =>
+  const run = (extra, name = "mutation.mjs") =>
     new Promise((ended) => {
-      const child = spawn(process.execPath, [launcher, "query"], {
+      const child = spawn(process.execPath, [join(dirname(launcher), name), "query"], {
         env: { ...env, FAKE_LOG: log, FAKE_CLAIMED: `${pending}.claimed`, ...extra },
         stdio: "ignore",
       });
@@ -222,6 +224,61 @@ test("planted: a Unix prefix taken as the folder above node_modules, and a relat
   assert.notDeepEqual(checkLayout(await loaded(prefix)), []);
   const relative = planted(sources.layout, [[": xdg && p.isAbsolute(xdg)", ": xdg"]]);
   assert.notDeepEqual(checkLayout(await loaded(relative)), []);
+});
+
+// The name the launcher was invoked by: `mut` by npm's link of that name on each system's paths, any other
+// name `mutation`.
+const checkInvoked = (invoked) => {
+  const cases = [
+    ["/p/bin/mut", "mut"],
+    ["/p/bin/mutation", "mutation"],
+    ["C:\\p\\mut.cmd", "mut"],
+    ["/p/lib/node_modules/@mutationhq/cli/bin/mutation.mjs", "mutation"],
+    ["/p/bin/mutt", "mutation"],
+    [undefined, "mutation"],
+  ];
+  return cases.filter(([script, name]) => invoked(script) !== name).map(([script]) => String(script));
+};
+
+const loadedInvoked = async (text) => {
+  const file = join(scratch(), "layout.mjs");
+  writeFileSync(file, text);
+  return (await import(pathToFileURL(file).href)).invoked;
+};
+
+test("the name it was invoked by", async () => {
+  assert.deepEqual(checkInvoked(await loadedInvoked(sources.layout)), []);
+});
+
+test("planted: every name that starts with mut taken as mut", async () => {
+  const loose = planted(sources.layout, [["/^mut(\\.(c?js|mjs|cmd|ps1|exe))?$/i", "/^mut/i"]]);
+  assert.notDeepEqual(checkInvoked(await loadedInvoked(loose)), []);
+});
+
+// The binary started under the name the launcher was run by: `mutation`, or `mut`; and npm installs the
+// launcher as both commands.
+const checkNamed = async (text, manifest) => {
+  const at = world(text);
+  await at.run({});
+  await at.run({}, "mut.mjs");
+  const names = at.events().filter((event) => event.name === "run").map((event) => event.text);
+  const wrong = JSON.stringify(names) === JSON.stringify(["mutation", "mut"]) ? [] : [`started as ${names}`];
+  const bin = JSON.parse(manifest).bin ?? {};
+  if (bin.mutation !== "bin/mutation.mjs" || bin.mut !== bin.mutation) wrong.push(`bin ${JSON.stringify(bin)}`);
+  return wrong;
+};
+
+const manifest = readFileSync(join(here, "..", "package.json"), "utf8");
+
+test("the binary runs under the name it was invoked by, and npm installs both", async () => {
+  assert.deepEqual(await checkNamed(sources.launcher, manifest), []);
+});
+
+test("planted: the name not passed on, and the second command left out", async () => {
+  const unnamed = planted(sources.launcher, [[', argv0: name', ""]]);
+  assert.notDeepEqual(await checkNamed(unnamed, manifest), []);
+  const single = planted(manifest, [[',\n    "mut": "bin/mutation.mjs"', ""]]);
+  assert.notDeepEqual(await checkNamed(sources.launcher, single), []);
 });
 
 test("an update the binary accepts is installed once and its claim consumed", async () => {

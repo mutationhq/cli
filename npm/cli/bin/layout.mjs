@@ -2,7 +2,8 @@
 // Copyright (c) 2026 Mutation.sh. See the file LICENSE in this package.
 //
 // Where the launcher at `file` finds npm's global folder and the binary's update marker on `platform`, from
-// `env` and the user's `home`: a pure function, so that each system's layout is a test on every system.
+// `env` and the user's `home`, and the name it was invoked by: pure functions, so that each system's layout
+// is a test on every system.
 
 import path from "node:path";
 
@@ -29,4 +30,13 @@ export const layout = ({ file, platform, env, home }) => {
   if (!cache) return {};
   const marker = p.join(cache, "mutation", "update-npm.pending");
   return { prefix, modules, marker, claimed: `${marker}.claimed` };
+};
+
+// The name the launcher was invoked by, from the path Node was given (`process.argv[1]`): `mut` where its
+// stem is `mut` (npm links `<prefix>/bin/mut` to this file), else `mutation`. The binary is started under
+// that name, so its help and errors show it. npm's Windows shims pass this file's own path, so there the
+// name is `mutation`.
+export const invoked = (script) => {
+  const name = path.win32.basename(path.posix.basename(script ?? ""));
+  return /^mut(\.(c?js|mjs|cmd|ps1|exe))?$/i.test(name) ? "mut" : "mutation";
 };

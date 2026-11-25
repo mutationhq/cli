@@ -18,6 +18,8 @@ Not supported: Intel Macs, musl-based Linux such as Alpine, and Windows on ARM.
 
 Each build is one native binary with no runtime dependency: the npm launcher needs Node, the binary does not.
 
+Every way of installing gives two commands, `mutation` and `mut`, the same program: npm installs both, and the archives and Homebrew add `mut` beside `mutation`. Help and errors name the one you typed, but for npm's commands on Windows, which always say `mutation`.
+
 ## npm
 
 ```sh
@@ -43,7 +45,7 @@ npx @mutationhq/cli --help
 brew install mutationhq/tap/mutation
 ```
 
-The formula lives in [mutationhq/homebrew-tap](https://github.com/mutationhq/homebrew-tap) and installs the prebuilt binary of each release. Always give the full name `mutationhq/tap/mutation`: it cannot be confused with a formula of the same short name elsewhere.
+The formula lives in [mutationhq/homebrew-tap](https://github.com/mutationhq/homebrew-tap) and installs the prebuilt binary of each release, with `mut` linked to it. Always give the full name `mutationhq/tap/mutation`: it cannot be confused with a formula of the same short name elsewhere.
 
 ## Mirrors, proxies and caches
 
@@ -51,7 +53,7 @@ A copy fetched through a registry mirror, your organization's npm proxy, a CDN s
 
 ## Archives
 
-Each [GitHub Release](https://github.com/mutationhq/cli/releases) carries one archive per platform: `mutation-<version>-macos-arm64.tar.gz`, `mutation-<version>-linux-x64.tar.gz`, `mutation-<version>-linux-arm64.tar.gz` and `mutation-<version>-windows-x64.zip`. Each holds, at its root, the binary, `LICENSE-BINARY` (its licence), `THIRD-PARTY-NOTICES`, `README.md` and `LICENSE` (the MIT licence of that README). Check the archive before you unpack it ([verifying releases](verifying-releases.md)), then put the folder on your `PATH`, keeping its files together so that `mutation` can [update](#updates) itself there.
+Each [GitHub Release](https://github.com/mutationhq/cli/releases) carries one archive per platform: `mutation-<version>-macos-arm64.tar.gz`, `mutation-<version>-linux-x64.tar.gz`, `mutation-<version>-linux-arm64.tar.gz` and `mutation-<version>-windows-x64.zip`. Each holds, at its root, the binary, `mut` (a symbolic link to it; on Windows `mut.exe`, a copy), `LICENSE-BINARY` (its licence), `THIRD-PARTY-NOTICES`, `README.md` and `LICENSE` (the MIT licence of that README). Check the archive before you unpack it ([verifying releases](verifying-releases.md)), then put the folder on your `PATH`, keeping its files together so that `mutation` can [update](#updates) itself there.
 
 ## Updates
 

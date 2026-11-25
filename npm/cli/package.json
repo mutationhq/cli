@@ -24,7 +24,8 @@
   },
   "type": "module",
   "bin": {
-    "mutation": "bin/mutation.mjs"
+    "mutation": "bin/mutation.mjs",
+    "mut": "bin/mutation.mjs"
   },
   "files": [
     "bin/mutation.mjs",

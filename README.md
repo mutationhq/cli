@@ -13,6 +13,12 @@
   <a href="#license">License</a>
 </p>
 
+Run it in any git repository:
+
+```sh
+npx @mutationhq/cli verify
+```
+
 `mutation` reads a clone from any git host into a code graph, with Mutation's own parsers, and answers from it for you, your CI and your coding agents:
 
 - **Verify**: does this change keep the repository's rules? `mutation verify` decides **pass**, **fail** or **incomplete** against the change's base, with an exit code CI and agents act on.
@@ -23,6 +29,23 @@
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/verify-dark.svg">
   <img alt="Illustration of mutation verify main..HEAD: one new blocking finding, an invariant whose target is reached without its guard, shown with its call path; the decision is fail and the exit code 3" src="docs/assets/verify-light.svg">
 </picture>
+
+```console
+$ mutation verify main..HEAD
+new  blocking  invariant refund-needs-auth: refund is reached without require_auth
+     main -> retry_refund -> refund                          src/billing.rs:42
+fixed 0 · standing 2 · undetermined 0
+fail: 1 new blocking finding (exit 3)
+```
+
+<sub>Illustrative output. A blocking finding the change adds (or one it cannot compare) fails it; the 2 standing ones were there before.</sub>
+
+| Where | Start with |
+| --- | --- |
+| Your terminal | `mutation verify` |
+| A git hook, before each push | `mutation install hooks` |
+| CI | [one step](#use-it-in-cicd): `npx --yes @mutationhq/cli verify origin/main...HEAD` |
+| Coding agents | `mutation install agent` |
 
 **Supports your languages.** Full code graph, calls, impact and invariants, for Rust, Go, TypeScript, JavaScript, Python, Java, Kotlin, C, C++, Objective-C, C#, Swift, PHP, Ruby, shell scripts (sh, Bash, zsh), SQL, openCypher and Protobuf. Some support for 200+ more.
 
@@ -35,7 +58,7 @@ mutation query find main --fuzzy         # every definition named like main, wit
 mutation verify                          # your uncommitted changes against HEAD: pass, fail or incomplete
 ```
 
-No install: `npx @mutationhq/cli verify`. Runs on macOS (Apple silicon), Linux (x64, ARM64) and Windows (x64). Use the `@mutationhq/cli` package, not the unscoped `mutation` one.
+Also installed as `mut`. Runs on macOS (Apple silicon), Linux (x64, ARM64) and Windows (x64). Use the `@mutationhq/cli` package, not the unscoped `mutation` one.
 
 **Your code stays on your machine.** `mutation` sends nothing of your repositories anywhere. Its one network feature is updating itself, checked at most once a day and never in CI; `MUT_UPDATE=off` turns it off. The [privacy notice](docs/privacy.md) lists what each version sends, before that version ships.
 
@@ -70,6 +93,8 @@ mutation verify main..HEAD --output html=report.html   # verify a branch and wri
 ```
 
 The first command indexes the repository into `.mutation/data.mt`; later commands read only what changed. `mutation query catalog` lists what the index holds, including its languages and probes, and `--print-sql` shows the SQL behind any query.
+
+To verify each push before it leaves your machine: `mutation install hooks`.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/query-dark.svg">
@@ -132,9 +157,16 @@ mutation verify; echo "exit $?"    # pass; exit 0
 
 What makes the decision one to rely on:
 
-- **Only what the change did.** Findings on the change and its base are compared: new, fixed, standing or undetermined. A finding is anchored to a definition, not a line, so moving code does not make it new. By default only new blocking findings fail.
+- **Only what the change did.** Findings on the change and its base are compared: new, fixed, standing or undetermined. A finding is anchored to a definition, not a line, so moving code does not make it new. By default new and undetermined blocking findings fail.
 - **Incomplete is never a pass.** If a probe did not run or a file was skipped, the answer says so and `verify` decides **incomplete** (exit 4).
 - **Any input.** A revision, a comparison (`A..B`, or `A...B` from the merge base), the worktree, a patch (`git diff | mutation verify --patch - --at main`) or a folder without git.
+
+## Adopt it on an existing codebase
+
+1. Run `mutation verify` on a branch. Findings already on its base are `standing` and do not fail it.
+2. Add the [CI step](#use-it-in-cicd). By default a change fails only on blocking findings it adds or that cannot be compared, so standing ones in old code block no one.
+3. Write the rules you want held in `mutation.yml`, starting from `mutation config init`.
+4. Run `mutation install hooks` and `mutation install agent`, so pushes and agents are verified too.
 
 ## How it works
 
@@ -153,7 +185,14 @@ What makes the decision one to rely on:
 
 ## Use it with coding agents
 
-The [`mutation` skill](skills/mutation/SKILL.md) teaches an agent the loop: understand the code with `query` and `context` before an edit, and run `mutation verify` before it says a task is done. One skill, in the open [Agent Skills](https://agentskills.io) format, serves every agent:
+```sh
+mutation install agent --dry-run   # what it would write, for the agents it finds
+mutation install agent
+```
+
+It writes the [`mutation` skill](skills/mutation/SKILL.md) into each agent's skills folder and three lines into `AGENTS.md` (imported by `CLAUDE.md` for Claude Code), each marked so that running it again, upgrading or `--remove` touches only its own. It changes no agent settings. The skill teaches an agent the loop: understand the code with `query` and `context` before an edit, and run `mutation verify` before it says a task is done.
+
+To install the skill for every project instead, in the open [Agent Skills](https://agentskills.io) format:
 
 | Agent | Install |
 | --- | --- |
@@ -163,6 +202,8 @@ The [`mutation` skill](skills/mutation/SKILL.md) teaches an agent the loop: unde
 | Any other agent | `npx skills add mutationhq/cli` |
 
 What that looks like: asked to retry failed refunds, the agent runs `mutation query callers billing::refund` to see who calls it and `mutation context billing::refund` to read the code around it, adds `retry_refund`, and runs `mutation verify`. Exit 3 names the path that skips `require_auth`; the agent adds the guard, runs `verify` again and reports the pass, exit 0.
+
+Coming next: while your agent edits, `mutation watch` will verify after each change and write one JSON line per result, so you (or the agent) see what broke as soon as it breaks.
 
 In Kiro IDE: **Powers**, **Add Custom Power**, then import `https://github.com/mutationhq/cli`. Without skills, three lines in `AGENTS.md` do the same:
 
@@ -223,11 +264,13 @@ cosign verify-blob --key cosign.pub --bundle SHA256SUMS.sigstore.json SHA256SUMS
 | --- | --- |
 | 0 | Done; `verify` decided pass |
 | 1 | Failed: I/O, an output not written, a corrupt data file |
-| 2 | Usage: arguments, settings, or a revision or key that does not resolve |
+| 2 | Usage: arguments, settings, or a revision or key that does not resolve; an `install` step refused |
 | 3 | `verify` decided fail |
 | 4 | Incomplete answer or decision |
 
-- [Commands](docs/commands.md): `verify`, `query` and its 14 kinds, `context`, `watch`, `index`, `config`, `completions`, and every flag and format (`json`, `jsonl`, `csv`, `graphml`, `sarif`, `codeclimate`, `markdown`, `html`, `xml`).
+In a script, 0, 3 and 4 are completed runs: act on the decision. 1 and 2 mean `mutation` did not do the work, so never hide them with `|| true`.
+
+- [Commands](docs/commands.md): `verify`, `query` and its 14 kinds, `context`, `watch`, `index`, `install`, `config`, `completions`, and every flag and format (`json`, `jsonl`, `csv`, `graphml`, `sarif`, `codeclimate`, `markdown`, `html`, `xml`).
 - [Configuration](docs/configuration.md): the repository's `mutation.yml` and the machine's `config.yml` and `MUT_*` variables.
 - [Exit codes](docs/exit-codes.md), [installation and updates](docs/installation.md), [verifying releases](docs/verifying-releases.md) (each release carries a signed `SHA256SUMS`), [changelog](CHANGELOG.md).
 
