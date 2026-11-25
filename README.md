@@ -18,7 +18,6 @@
 - **Verify**: does this change keep the repository's rules? `mutation verify` decides **pass**, **fail** or **incomplete** against the change's base, with an exit code CI and agents act on.
 - **Query**: who calls this, what breaks if it changes, how one function reaches another; or any question in SQL or openCypher.
 - **Context**: the code an agent needs around a target, within a token budget.
-- **Reports**: `mutation verify --output html=report.html` writes one self-contained page with the findings and charts of the code.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/verify-dark.svg">
