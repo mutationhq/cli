@@ -4,6 +4,7 @@
 
 <p align="center">
   <a href="#try-it">Try it</a> ·
+  <a href="#see-it-on-real-code">Real code</a> ·
   <a href="#catch-a-broken-rule">Catch a broken rule</a> ·
   <a href="#where-it-fits">Where it fits</a> ·
   <a href="#use-it-with-coding-agents">Agents</a> ·
@@ -41,6 +42,18 @@ No install: `npx @mutationhq/cli verify`. Runs on macOS (Apple silicon), Linux (
 
 > [!TIP]
 > **Prefer it hosted?** [Mutation](https://mutation.sh) runs the same verification as a service on every pull request and merge request, on GitHub, GitLab and other git hosts, with results in the review and a console for your team.
+
+## See it on real code
+
+Charts from `mutation` on public repositories ([how each was made](docs/assets/gallery/SOURCES.md)):
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="docs/assets/gallery/trends-cobra-dark.svg"><img alt="spf13/cobra over 200 commits: lines, complexity and duplicated lines, each with its slope per 100 commits" src="docs/assets/gallery/trends-cobra-light.svg"></picture>
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="docs/assets/gallery/reach-tokio-dark.svg"><img alt="tokio-rs/tokio: the functions that depend on what one commit changed, hop by hop along the call graph" src="docs/assets/gallery/reach-tokio-light.svg"></picture>
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="docs/assets/gallery/treemap-tokio-dark.svg"><img alt="tokio-rs/tokio: its modules sized by lines and shaded by complexity per 100 lines" src="docs/assets/gallery/treemap-tokio-light.svg"></picture>
+
+Make your own for any repository: `mutation verify --output html=report.html`.
 
 ## Try it
 
