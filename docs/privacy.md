@@ -4,7 +4,7 @@ Version 1.2, effective 2026-11-25. Applies to `mutation` 0.1.0 and later until a
 
 ## Who we are
 
-[[SELLER LEGAL NAME]], a [[SELLER LEGAL FORM]] trading as Mutation.sh ("Mutation"), established at [[SELLER ADDRESS]], is responsible for the processing this notice describes. Contact: support@mutation.sh. When a version of the Software first sends Telemetry, this notice will name Mutation's representatives in the European Union and the United Kingdom where the law requires them.
+Mutation.sh ("Mutation") is responsible for the processing this notice describes. Contact: support@mutation.sh. When a version of the Software first sends Telemetry, this notice will name Mutation's representatives in the European Union and the United Kingdom where the law requires them.
 
 ## Your code stays on your machine
 
@@ -37,7 +37,7 @@ If you email support@mutation.sh, Mutation uses your name, address and message t
 
 ## When you buy a Runner License
 
-For purchases, Mutation processes customer identity, contact details, organization, order, billing and tax information to administer the contract and comply with legal obligations, such as tax and accounting records. The legal bases are the contract (Article 6(1)(b) GDPR) and Mutation's legal obligations (Article 6(1)(c) GDPR). Payments, invoices and the computation of sales tax and VAT are handled by Stripe (Stripe, Inc., and Stripe Payments Europe, Limited for customers in the European Economic Area and the United Kingdom), which processes this data as Mutation's payment processor and, for its own legal and fraud-prevention obligations, as an independent controller under its privacy policy ([[PAYMENT PROVIDER PRIVACY URL]]); that policy states where Stripe transfers the data and the safeguards it uses. Mutation does not receive full payment-card details: Stripe handles them directly. Order records are retained for [[ORDER RECORDS RETENTION]].
+For purchases, Mutation processes customer identity, contact details, organization, order, billing and tax information to administer the contract and comply with legal obligations, such as tax and accounting records. The legal bases are the contract (Article 6(1)(b) GDPR) and Mutation's legal obligations (Article 6(1)(c) GDPR). Payments, invoices and the computation of sales tax and VAT are handled by Stripe (Stripe, Inc., and Stripe Payments Europe, Limited for customers in the European Economic Area and the United Kingdom), which processes this data as Mutation's payment processor and, for its own legal and fraud-prevention obligations, as an independent controller under its privacy policy (https://stripe.com/privacy); that policy states where Stripe transfers the data and the safeguards it uses. Mutation does not receive full payment-card details: Stripe handles them directly. Order records are kept in Stripe for as long as Stripe retains them.
 
 ## Where you get the CLI
 

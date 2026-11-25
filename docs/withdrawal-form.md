@@ -4,7 +4,7 @@ Version 1.0, effective 2026-11-25. If you are a consumer in the European Union, 
 
 Complete and return this form only if you wish to withdraw from the contract.
 
-- To [[SELLER LEGAL NAME]], trading as Mutation.sh, [[SELLER ADDRESS]], email support@mutation.sh:
+- To Mutation.sh, email support@mutation.sh:
 - I/We (\*) hereby give notice that I/We (\*) withdraw from my/our (\*) contract for the supply of the following digital content (\*)/for the provision of the following service (\*): a Runner License for the Mutation CLI
 - Ordered on (\*)/received on (\*):
 - Order number (if known):
