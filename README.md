@@ -24,7 +24,7 @@
   <img alt="Illustration of mutation verify main..HEAD: one new blocking finding, an invariant whose target is reached without its guard, shown with its call path; the decision is fail and the exit code 3" src="docs/assets/verify-light.svg">
 </picture>
 
-**Languages.** The full graph (calls, impact, invariants) for Rust, Go, TypeScript, JavaScript, Python, Java, Kotlin, C, C++, Objective-C, C#, Swift, PHP, Ruby, shell scripts (sh, Bash, zsh), SQL, openCypher and Protobuf; lines, comments and duplicated code for over 200 more; JSON, TOML, YAML, XML, INI and Dockerfiles read whole, with the manifests of their build tools.
+**Supports your languages.** Full code graph, calls, impact and invariants, for Rust, Go, TypeScript, JavaScript, Python, Java, Kotlin, C, C++, Objective-C, C#, Swift, PHP, Ruby, shell scripts (sh, Bash, zsh), SQL, openCypher and Protobuf. Some support for 200+ more.
 
 Installing or using `mutation` means you accept the [Mutation CLI License](LICENSE-BINARY).
 
