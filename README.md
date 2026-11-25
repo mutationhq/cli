@@ -1,6 +1,6 @@
 <h1 align="center">Mutation CLI</h1>
 
-<p align="center"><b>Verify each change to your code before it lands, a person's or an agent's, and ask the repository how its code connects.</b></p>
+<p align="center"><b>Verify every change before it lands, and ask your code how it connects.</b></p>
 
 <p align="center">
   <a href="#try-it">Try it</a> ·
