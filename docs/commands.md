@@ -18,7 +18,7 @@ Data goes to stdout; errors, progress and completeness go to stderr. Human text 
 | `--config FILE` | A machine settings file read over the user's; it must exist |
 | `--color auto\|always\|never` | `auto` honours `NO_COLOR` and `CLICOLOR_FORCE` |
 | `-q`, `--quiet` | Print nothing on stderr but errors |
-| `-V`, `--version` | The version; with `--format json`, the build's details (target, commit, date) |
+| `-V`, `--version` | The version; with `--format json`, the build's details (target, date) |
 
 ## Inputs
 
