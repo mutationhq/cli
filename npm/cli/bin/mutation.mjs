@@ -59,12 +59,9 @@ try {
   process.stderr.write(
     known
       ? `${name}: the package @mutationhq/cli-${platform} is not installed.\n` +
-          (process.platform === "linux"
-            ? "  note: Linux builds need glibc 2.28 or newer; musl systems such as Alpine are not supported\n"
-            : "") +
           "  fix: install @mutationhq/cli again with optional dependencies included (npm install --include=optional)\n"
       : `${name}: no build for ${platform}.\n` +
-          `  supported: ${supported.join(", ")} (Linux with glibc 2.28 or newer)\n`,
+          `  supported: ${supported.join(", ")}\n`,
   );
   process.exit(1);
 }

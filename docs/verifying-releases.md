@@ -11,11 +11,11 @@ What each release carries and how to check it. The release key's public half is 
 | `option-ext-0.2.0.crate` | The source of `option-ext`, the one component under the Mozilla Public License 2.0, included unmodified (see `THIRD-PARTY-NOTICES`) |
 | `SHA256SUMS` | The SHA-256 of every archive, bill of materials and source file above |
 | `SHA256SUMS.sigstore.json` | A cosign signature of `SHA256SUMS`, made with the release key |
-| `<archive>.intoto.sigstore.json` | A provenance statement for each archive: the source commit, the build host's system and architecture, the compiler's version, the build image's digest |
+| `<archive>.intoto.sigstore.json` | A provenance statement for each archive: the source commit, the build host's system and architecture, the build tool and the compiler's version |
 
 The provenance is self-attested (SLSA Build L1): releases are built on Mutation's own machines, not on a hosted CI service, so they carry no GitHub artifact attestation and no npm provenance.
 
-Beyond these files, the macOS binary is signed with an Apple Developer ID and notarized, and the Windows binary signed with Authenticode.
+Beyond these files, the macOS binary is signed with an Apple Developer ID and notarized. The Windows binary carries no Authenticode signature yet: `SHA256SUMS` and its cosign signature are what vouch for it.
 
 ## Check an archive's checksum
 
@@ -64,11 +64,6 @@ Run these on the binary unpacked from the archive (with npm, `mutation` on your 
 ```sh
 # macOS
 codesign --verify --strict --verbose=2 ./mutation
-```
-
-```powershell
-# Windows
-Get-AuthenticodeSignature .\mutation.exe
 ```
 
 The npm packages and the Homebrew formula install the same binaries as the archives.

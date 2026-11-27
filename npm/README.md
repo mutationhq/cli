@@ -6,16 +6,16 @@
 | --- | --- |
 | `@mutationhq/cli` | The launcher `bin/mutation.mjs` with its `bin/layout.mjs`, installed as the commands `mutation` and `mut`, and the four packages below as `optionalDependencies` at its exact version |
 | `@mutationhq/cli-darwin-arm64` | `bin/mutation` for macOS ARM64 |
-| `@mutationhq/cli-linux-x64` | `bin/mutation` for Linux x64, glibc 2.28 or newer |
-| `@mutationhq/cli-linux-arm64` | `bin/mutation` for Linux ARM64, glibc 2.28 or newer |
+| `@mutationhq/cli-linux-x64` | `bin/mutation` for Linux x64, static: glibc and musl systems alike |
+| `@mutationhq/cli-linux-arm64` | `bin/mutation` for Linux ARM64, static: glibc and musl systems alike |
 | `@mutationhq/cli-win32-x64` | `bin/mutation.exe` for Windows x64 |
 
 ## How an install works
 
 1. npm installs `@mutationhq/cli` and reads its optional dependencies.
-2. Each platform package declares `os`, `cpu` and, on Linux, `libc: ["glibc"]`, so npm (and pnpm, Yarn, Bun) installs only the one that matches the machine and skips the others. No install script runs.
+2. Each platform package declares `os` and `cpu`, so npm (and pnpm, Yarn, Bun) installs only the one that matches the machine and skips the others. No install script runs.
 3. `mutation` (or `mut`) runs the launcher, which finds the matching package with Node's `require.resolve`, starts its binary under the name it was invoked by (on Windows, npm's shims always give `mutation`) with the same arguments and stdio, forwards SIGINT and SIGTERM, and exits with the binary's exit code. If the binary was ended by a signal, the launcher raises that signal on itself, so the shell sees what it would have seen without Node in between. It first installs an update that the binary left for it, the same way on every system, since Windows cannot replace the binary while it runs ([updates](../docs/installation.md#updates)).
-4. When no package matches (an unsupported system, musl, or optional dependencies omitted), the launcher names the supported platforms and exits 1.
+4. When no package matches (an unsupported system, or optional dependencies omitted), the launcher names the supported platforms and exits 1.
 
 `preferUnplugged: true` tells Yarn Plug'n'Play to keep each binary on disk where it can be executed.
 
@@ -23,7 +23,7 @@ The launcher's tests run on Node's own runner, with no dependencies: `node --tes
 
 ## What the release adds
 
-The binaries are not in git (`npm/*/bin/` is ignored, except the launcher's folder). The release command builds each one natively on its platform, signs it, copies it into its package's `bin/`, writes `THIRD-PARTY-NOTICES` at the package root (cargo-about for the crates, then the Rust standard library, Linguist, jemalloc, libdeflate and the MPL-2.0 source statement, as the [changelog](../CHANGELOG.md) lists), writes the version into all five manifests, and publishes the four platform packages before `@mutationhq/cli`. Each GitHub archive gets `mut` beside the binary (a symbolic link; on Windows `mut.exe`, a copy), and the Homebrew formula the release writes links it too (`bin.install_symlink "mutation" => "mut"`).
+The binaries are not in git (`npm/*/bin/` is ignored, except the launcher's folder). The release command builds each one on Mutation's own machines, signs and notarizes the macOS binary, copies it into its package's `bin/`, writes `THIRD-PARTY-NOTICES` at the package root (cargo-about for the crates, then the Rust standard library, Linguist, jemalloc, libdeflate and the MPL-2.0 source statement, as the [changelog](../CHANGELOG.md) lists), writes the version into all five manifests, and publishes the four platform packages before `@mutationhq/cli`. Each GitHub archive gets `mut` beside the binary (a symbolic link; on Windows `mut.exe`, a copy), and the Homebrew formula the release writes links it too (`bin.install_symlink "mutation" => "mut"`).
 
 ## Licences
 

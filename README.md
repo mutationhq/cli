@@ -244,7 +244,7 @@ Public repositories run it in CI for free; private ones need a [Runner License](
 
 ## Signed releases
 
-Each release carries a `SHA256SUMS` signed with cosign, a provenance statement and a software bill of materials for every archive; the macOS binary is notarized and the Windows binary Authenticode-signed, and `mutation` checks the signature itself before it installs an update.
+Each release carries a `SHA256SUMS` signed with cosign, a provenance statement and a software bill of materials for every archive; the macOS binary is notarized, and `mutation` checks the signature itself before it installs an update.
 
 <details>
 <summary>Check a download before you run it</summary>

@@ -41,7 +41,7 @@ Mutation never asks you to install it from anywhere else: not from a link in an 
 
 ## Verifying a release
 
-Each release carries a `SHA256SUMS` file, a cosign signature of it made with the release key (`cosign.pub` in this repository's root), and a provenance statement for each archive. The macOS binary is signed with an Apple Developer ID and notarized; the Windows binary is signed with Authenticode. Before you use a download:
+Each release carries a `SHA256SUMS` file, a cosign signature of it made with the release key (`cosign.pub` in this repository's root), and a provenance statement for each archive. The macOS binary is signed with an Apple Developer ID and notarized. The Windows binary carries no Authenticode signature yet; check it by `SHA256SUMS` and its cosign signature. Before you use a download:
 
 ```sh
 cosign verify-blob --key cosign.pub --bundle SHA256SUMS.sigstore.json SHA256SUMS

@@ -15,7 +15,7 @@ The first release.
 - Exit codes 0 to 5 and 130, and errors as `mutation: <message> (<code>)` on stderr, or one `mutation-error/1` JSON line under a machine format.
 - `mutation --version --format json` with the build's target, commit and date.
 - The `mutation` agent skill (`skills/mutation`, the Agent Skills format) with its manifests for Claude Code (`.claude-plugin/marketplace.json`), Codex (`.agents/plugins/marketplace.json`) and Agent Plugins (`plugin.json`: Kiro powers and others); `npx skills add mutationhq/cli` installs it for any agent.
-- Builds for macOS ARM64, Linux x64 and ARM64 (glibc 2.28 or newer), and Windows x64, published to npm as `@mutationhq/cli` and to Homebrew as `mutationhq/tap/mutation`.
+- Builds for macOS ARM64, Linux x64 and ARM64 (static, any distribution: glibc and musl alike), and Windows x64, published to npm as `@mutationhq/cli` and to Homebrew as `mutationhq/tap/mutation`.
 
 ### Legal
 

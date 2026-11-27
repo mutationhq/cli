@@ -10,11 +10,11 @@ By installing or using `mutation` you accept the [Mutation CLI License](../LICEN
 | System | Architecture | Requirement |
 | --- | --- | --- |
 | macOS | ARM64 (Apple silicon) | |
-| Linux | x64 | glibc 2.28 or newer (RHEL and Rocky 8+, Debian 10+, Ubuntu 20.04+, Amazon Linux 2023); a CPU with x86-64-v2 |
-| Linux | ARM64 | glibc 2.28 or newer; ARMv8.2 with LSE atomics and dot product (Neoverse N1, AWS Graviton 2 and newer; not a Raspberry Pi 4) |
+| Linux | x64 | Any distribution: the binary is static, for glibc and musl systems (Alpine) alike; a CPU with x86-64-v2 |
+| Linux | ARM64 | Any distribution, glibc or musl; ARMv8.2 with LSE atomics and dot product (Neoverse N1, AWS Graviton 2 and newer; not a Raspberry Pi 4) |
 | Windows | x64 | A CPU with x86-64-v2 |
 
-Not supported: Intel Macs, musl-based Linux such as Alpine, and Windows on ARM.
+Not supported: Intel Macs and Windows on ARM.
 
 Each build is one native binary with no runtime dependency: the npm launcher needs Node, the binary does not.
 
