@@ -4,6 +4,8 @@ Every notable change to the `mutation` CLI, and to its [legal documents](docs/le
 
 ## [Unreleased]
 
+## [0.0.2] - 2026-11-27
+
 The first release.
 
 ### Added

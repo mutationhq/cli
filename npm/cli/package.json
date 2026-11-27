@@ -1,6 +1,6 @@
 {
   "name": "@mutationhq/cli",
-  "version": "0.1.0",
+  "version": "0.0.2",
   "description": "Mutation's command line: verify a mutation and query the System State of a repository",
   "keywords": [
     "mutation",
@@ -37,9 +37,9 @@
     "node": ">=18"
   },
   "optionalDependencies": {
-    "@mutationhq/cli-darwin-arm64": "0.1.0",
-    "@mutationhq/cli-linux-x64": "0.1.0",
-    "@mutationhq/cli-linux-arm64": "0.1.0",
-    "@mutationhq/cli-win32-x64": "0.1.0"
+    "@mutationhq/cli-darwin-arm64": "0.0.2",
+    "@mutationhq/cli-linux-arm64": "0.0.2",
+    "@mutationhq/cli-linux-x64": "0.0.2",
+    "@mutationhq/cli-win32-x64": "0.0.2"
   }
 }

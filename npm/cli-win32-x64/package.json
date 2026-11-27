@@ -1,6 +1,6 @@
 {
   "name": "@mutationhq/cli-win32-x64",
-  "version": "0.1.0",
+  "version": "0.0.2",
   "description": "The mutation binary for Windows x64; installed by @mutationhq/cli",
   "license": "SEE LICENSE IN LICENSE-BINARY",
   "author": "Mutation <support@mutation.sh>",
